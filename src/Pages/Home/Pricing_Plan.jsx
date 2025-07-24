@@ -58,7 +58,6 @@ const Pricing_Plan = () => {
     setIsModalOpen(false)
   }
 
-  // Animation variants for mobile view
   const mobileTextVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -72,10 +71,9 @@ const Pricing_Plan = () => {
   return (
     <section 
     id="pricing_plan"
-    className="md:p-5 bg-[#F1F8FE] dark:bg-[#F1F8FE] md:py-20 pt-10 md:pt-28 pb-10 md:pb-10 md:min-h-[75vh] flex items-center justify-center">
+    className="md:p-5 bg-[#E0F7FF] dark:bg-[#F1F8FE] md:py-20 pt-10 md:pt-28 pb-10 md:pb-10 md:min-h-[75vh] flex items-center justify-center">
       <ToastContainer />
 
-      {/* DaisyUI Modal */}
       <input
         type="checkbox"
         id="plan-modal"
@@ -178,7 +176,7 @@ const Pricing_Plan = () => {
       </div>
 
       {/* Large Device View */}
-      <div className="hidden md:block bg-[#F1F8FE] dark:bg-[#F1F8FE] container p-2 mx-auto md:pb-10">
+      <div className="hidden md:block bg-[#E0F7FF] dark:bg-[#F1F8FE] container p-2 mx-auto md:pb-10">
         <div className="container w-3/4 mx-auto text-start flex items-start justify-between mb-10 text-4xl font-bold">
           <div>
             <h1 className="text-[#16437E]">
@@ -199,7 +197,7 @@ const Pricing_Plan = () => {
         </div>
         <div className="w-full mx-auto pb-5">
           <iframe
-            className="md:w-[1150px] md:rounded-r-[50px] mx-auto md:rounded-bl-[50px] rounded-r-[20px] rounded-bl-[20px] rounded-tl-none md:h-[630px] w-full h-[250px] rounded relative z-10 border-4 border-[#9AEFFF] shadow-lg"
+            className="md:w-[1330px] md:rounded-r-[50px] mx-auto md:rounded-bl-[50px] rounded-r-[20px] rounded-bl-[20px] rounded-tl-none md:h-[630px] w-full h-[250px] rounded relative z-10 border-4 border-[#9AEFFF] shadow-lg"
             src="https://www.youtube.com/embed/tkoxvKiBtwc?si=aspqN1u1M7Gm_TfP"
             title="YouTube video player"
             frameBorder="0"

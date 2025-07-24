@@ -111,9 +111,9 @@ export default function Navbar() {
 
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-[#0B2A52] shadow-lg">
+    <nav className="fixed top-0 z-50 w-full bg-[#0B2A52] shadow-lg md:px-20">
       <Toaster/>
-      <div className="container mx-auto flex items-center justify-between py-3">
+      <div className="md:container mx-auto flex items-center justify-between py-3 ps-3 md:ps-0">
         {/* Logo */}
         <div className="z-10 flex items-center font-bold text-white">
           <img
@@ -121,7 +121,7 @@ export default function Navbar() {
             alt="VALR Logo"
             width={72}
             height={52}
-            className="h-[75px] w-[90px] pl-5 transition-all duration-300 sm:h-[80px] sm:w-[80px] md:h-[70px] md:w-[80px] md:pl-0"
+            className="h-[75px] w-[90px]  transition-all duration-300 sm:h-[80px] sm:w-[80px] md:h-[70px] md:w-[80px]"
           />
         </div>
 

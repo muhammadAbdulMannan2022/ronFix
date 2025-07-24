@@ -11,7 +11,7 @@ const Video = () => {
     : "https://www.youtube.com/embed/q4cFBVU0r7Q?si=ztT5O7d5lnFZantP";
 
   return (
-    <section className="md:pt-20 pt-6 md:px-4 border-none pb-6 px-2 bg-[#F1F8FE] dark:bg-[#F1F8FE]">
+    <section className="md:pt-20 pt-6 md:px-4 border-none pb-6 px-2 bg-[#E0F7FF] dark:bg-[#F1F8FE]">
       <div className="max-w-6xl mx-auto">
         <div className="w-full mx-auto aspect-video relative group">
          <iframe
