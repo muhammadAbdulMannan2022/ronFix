@@ -39,8 +39,8 @@ const Banner = () => {
                 </div>
                 <div className="uppercase font-semibold mt-3 container px-20">
                   <a
-                  href="/#pricing_plan"
-                  to="/plan" className="uppercase text-3xl bg-[#003794] text-[#FFFFFF] p-4 px-10 rounded-md">
+                    href="/#pricing_plan"
+                    to="/plan" className="uppercase text-3xl bg-[#003794] text-[#FFFFFF] p-4 px-10 rounded-md">
                     get started!
                   </a>
                 </div>

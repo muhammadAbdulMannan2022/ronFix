@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
 	reducerPath: "baseApi",
 	baseQuery: fetchBaseQuery({
-		baseUrl: "https://ronvergara.duckdns.org/",
+		baseUrl: "http://10.10.13.73:5000/",
 		prepareHeaders: (headers, { endpoint }) => {
 			// List of auth-related endpoints that should not include the token
 			const authEndpoints = [
@@ -165,6 +165,12 @@ export const baseApi = createApi({
 			query: () => "api/dashboard/documents/list/",
 			providesTags: ["documents"],
 		}),
+		closeChat: builder.mutation({
+			query: ({ chatId }) => ({
+				url: `/api/support/close-chat/${chatId}/`,
+				method: "POST",
+			})
+		})
 	}),
 });
 
@@ -194,4 +200,5 @@ export const {
 	useApprovedFormMutation,
 	useRejectFormMutation,
 	useGetDocumentsQuery,
+	useCloseChatMutation
 } = baseApi;

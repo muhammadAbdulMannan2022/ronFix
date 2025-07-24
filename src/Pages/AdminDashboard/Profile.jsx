@@ -17,7 +17,7 @@ const Profile = () => {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const baseURL = "https://ronvergara.duckdns.org";
+  const baseURL = "http://10.10.13.73:5000";
   const { data: loggedUser, isLoading: isUserLoading, error, refetch } = useGetLoggedUserQuery();
   const [updateProfile, { isLoading: isUpdating }] = useUpdateUserProfileMutation();
 
@@ -116,21 +116,19 @@ const Profile = () => {
         {/* Tabs */}
         <div className="flex justify-center space-x-4 mb-10">
           <button
-            className={`font-medium px-4 py-2 ${
-              activeTab === "editProfile"
+            className={`font-medium px-4 py-2 ${activeTab === "editProfile"
                 ? "text-blue-500 border-b-2 border-blue-500"
                 : "text-gray-500 hover:text-blue-500"
-            }`}
+              }`}
             onClick={() => setActiveTab("editProfile")}
           >
             Edit Profile
           </button>
           <button
-            className={`font-medium px-4 py-2 ${
-              activeTab === "changePassword"
+            className={`font-medium px-4 py-2 ${activeTab === "changePassword"
                 ? "text-blue-500 border-b-2 border-blue-500"
                 : "text-gray-500 hover:text-blue-500"
-            }`}
+              }`}
             onClick={() => setActiveTab("changePassword")}
           >
             Change Password
@@ -160,7 +158,7 @@ const Profile = () => {
             <div className="mb-4">
               <label className="block text-gray-600 mb-2">Email</label>
               <input
-       
+
                 type="email"
                 defaultValue={loggedUser?.email || ""}
                 {...register("email", {
@@ -208,7 +206,7 @@ const Profile = () => {
                   type={showCurrentPassword ? "text" : "password"}
                   {...register("current_password", {
                     required: "Current password is required",
-                    
+
                   })}
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-200 dark:text-gray-800"
                   placeholder="Enter your email"
@@ -237,9 +235,9 @@ const Profile = () => {
                   type={showNewPassword ? "text" : "password"}
                   {...register("new_password", {
                     required: "New password is required",
-                
 
-                    
+
+
                   })}
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-200 dark:text-gray-800"
                   placeholder="••••••••"

@@ -3,7 +3,7 @@ import { X, FileText } from "lucide-react";
 
 export default function DocumentsModal({ documents, isOpen, onClose }) {
 
-    const baseApi = "https://ronvergara.duckdns.org"
+  const baseApi = "http://10.10.13.73:5000"
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -84,13 +84,13 @@ export default function DocumentsModal({ documents, isOpen, onClose }) {
                             // </a>
 
                             <a
-  href={`${baseApi}${subDoc.file}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="text-blue-600 text-sm hover:underline"
->
-  View
-</a>
+                              href={`${baseApi}${subDoc.file}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 text-sm hover:underline"
+                            >
+                              View
+                            </a>
                           )}
                         </div>
                       ))}

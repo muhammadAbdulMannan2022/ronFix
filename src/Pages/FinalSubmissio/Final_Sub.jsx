@@ -19,14 +19,14 @@ function Final_Sub() {
       return;
     }
 
-    
+
     const excludedKeys = ['access_token', 'refresh_token'];
 
-    
+
     const payload = {};
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      
+
       if (excludedKeys.includes(key)) continue;
       try {
         const value = JSON.parse(localStorage.getItem(key));
@@ -36,14 +36,14 @@ function Final_Sub() {
       }
     }
 
-    
+
     payload.document = {
       discharge_condition: payload['discharge_condition'] || {},
       evidenceData: payload['evidenceData'] || {},
     };
 
     try {
-      const response = await fetch(' https://ronvergara.duckdns.org/api/va/vaform/submit/', {
+      const response = await fetch(' http://10.10.13.73:5000/api/va/vaform/submit/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ function Final_Sub() {
         autoClose: 3000,
       });
 
-     
+
       navigate('/va_form');
 
     } catch (error) {
@@ -89,13 +89,12 @@ function Final_Sub() {
 
         <button
           onClick={handleSubmit}
-          className={`bg-[#0A3161] text-white uppercase py-3 px-20 rounded-md hover:bg-[#104381] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-semibold ${
-            isSubmitting ? 'cursor-not-allowed' : ''
-          }`}
+          className={`bg-[#0A3161] text-white uppercase py-3 px-20 rounded-md hover:bg-[#104381] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-semibold ${isSubmitting ? 'cursor-not-allowed' : ''
+            }`}
           disabled={isSubmitting}
         >
           {isSubmitting ? (
-           <span className="loading loading-bars loading-lg"></span>
+            <span className="loading loading-bars loading-lg"></span>
           ) : (
             'Submit'
           )}
