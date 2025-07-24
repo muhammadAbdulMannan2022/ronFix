@@ -1,75 +1,188 @@
+// import { useState } from "react";
+// import { IoChevronDownOutline } from "react-icons/io5";
+
+// const faqs = [
+// 	{
+// 		question: "What benefits can I qualify for?",
+// 		answer: "Veterans can qualify for healthcare, disability compensation, education assistance, housing loans, pension benefits, vocational training, and survivor support programs.",
+// 	},
+// 	{
+// 		question: "What happens if I've been denied before?",
+// 		answer: "If you have been denied before, we can guide you through the appeal process to ensure you get the benefits you deserve.",
+// 	},
+// 	{
+// 		question: "How long does the process take?",
+// 		answer: "The process varies depending on the case, but generally it takes a few weeks to a few months.",
+// 	},
+// 	{
+// 		question: "What is your guest screening process?",
+// 		answer: "Our guest screening process includes background checks and verification to ensure a safe and secure environment.",
+// 	},
+// 	{
+// 		question: "How much are your Co-Hosting fees?",
+// 		answer: "Our Co-Hosting fees vary depending on the services you require. Contact us for more detailed pricing information.",
+// 	},
+// ];
+
+// export default function FAQ() {
+// 	const [openIndex, setOpenIndex] = useState(null);
+
+// 	const toggleAccordion = (index) => {
+// 		setOpenIndex(openIndex === index ? null : index);
+// 	};
+
+// 	return (
+// 		<section className="bg-[#E0F7FF] dark:bg-[#E0F7FF] md:py-20">
+// 			<div className="bg-[#0A3161] container mx-auto text-white py-10 md:px-10 bg-faq-pattern bg-cover bg-no-repeat bg-top">
+// 				<div className=" md:p-14 px-2  text-white md:px-10">
+// 					<div className=" mx-auto text-center mb-12">
+// 						<h2 className="md:text-4xl text-2xl md:text-start font-bold">
+// 							Frequently Asked Questions
+// 						</h2>
+// 						<p className="text-base md:text-start mt-4">
+// 							Find quick answers to common questions to help you get started faster.
+
+// We've answered the questions you’re most likely to ask—so you don’t have to wait.
+// 						</p>
+// 					</div>
+
+// 					<div className="space-y-4 ">
+// 						{faqs.map((faq, index) => (
+// 							<div
+// 								key={index}
+// 								className="border border-gray-200 rounded-none "
+// 							>
+// 								<div
+// 									onClick={() => toggleAccordion(index)}
+// 									className="flex justify-between items-center p-3  cursor-pointer transition-all"
+// 								>
+// 									<h3 className="text-[14px] md:text-[20px] lg:text-[20px] font-medium">
+// 										{faq.question}
+// 									</h3>
+// 									<IoChevronDownOutline />
+// 								</div>
+
+// 								{openIndex === index && (
+// 									<div className="p-4 bg-white text-xs md:text-[16px] lg:text-[16px] text-gray-900 rounded-none">
+// 										<p>{faq.answer}</p>
+// 									</div>
+// 								)}
+// 							</div>
+// 						))}
+// 					</div>
+// 				</div>
+// 			</div>
+// 		</section>
+// 	);
+// }
+
+
 import { useState } from "react";
-import { IoChevronDownOutline } from "react-icons/io5";
+import { ChevronDown } from "lucide-react";
+import { MdArrowForward } from "react-icons/md";
 
 const faqs = [
-	{
-		question: "What benefits can I qualify for?",
-		answer: "Veterans can qualify for healthcare, disability compensation, education assistance, housing loans, pension benefits, vocational training, and survivor support programs.",
-	},
-	{
-		question: "What happens if I've been denied before?",
-		answer: "If you have been denied before, we can guide you through the appeal process to ensure you get the benefits you deserve.",
-	},
-	{
-		question: "How long does the process take?",
-		answer: "The process varies depending on the case, but generally it takes a few weeks to a few months.",
-	},
-	{
-		question: "What is your guest screening process?",
-		answer: "Our guest screening process includes background checks and verification to ensure a safe and secure environment.",
-	},
-	{
-		question: "How much are your Co-Hosting fees?",
-		answer: "Our Co-Hosting fees vary depending on the services you require. Contact us for more detailed pricing information.",
-	},
+  {
+    question: "What benefits can I qualify for?",
+    answer:
+      "Veterans can qualify for healthcare, disability compensation, education assistance, housing loans, pension benefits, vocational training, and survivor support programs.",
+  },
+  {
+    question: "What happens if I've been denied before?",
+    answer:
+      "If you have been denied before, we can guide you through the appeal process to ensure you get the benefits you deserve.",
+  },
+  {
+    question: "How long does the process take?",
+    answer: "The process varies depending on the case, but generally it takes a few weeks to a few months.",
+  },
+  {
+    question: "What is your guest screening process?",
+    answer:
+      "Our guest screening process includes background checks and verification to ensure a safe and secure environment.",
+  },
+  {
+    question: "How much are your Co-Hosting fees?",
+    answer:
+      "Our Co-Hosting fees vary depending on the services you require. Contact us for more detailed pricing information.",
+  },
 ];
 
 export default function FAQ() {
-	const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState(null);
 
-	const toggleAccordion = (index) => {
-		setOpenIndex(openIndex === index ? null : index);
-	};
+  const toggleAccordion = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
-	return (
-		<section className="bg-[#E0F7FF] dark:bg-[#E0F7FF] md:py-20">
-			<div className="bg-[#0A3161] container mx-auto text-white py-10 md:px-10 bg-faq-pattern bg-cover bg-no-repeat bg-top">
-				<div className=" md:p-14 px-2 md:px-0 text-white">
-					<div className=" mx-auto text-center mb-12">
-						<h2 className="md:text-4xl text-2xl md:text-start font-bold">
-							Frequently Asked Questions
-						</h2>
-						<p className="text-base md:text-start mt-4">
-							We have your answers.
-						</p>
-					</div>
+  return (
+    <section
+	id="faqs"
+      className="md:py-16 py-10 bg-no-repeat bg-cover bg-center relative px-5"
+      style={{ backgroundImage: "url('https://i.ibb.co/v6qYf4X4/faq-bg.png')" }}
+    >
+      <div className="absolute inset-0 bg-black/20"></div>
+      <div className="container mx-auto px-3 md:px-20 relative z-10">
+        {/* Header */}
+        <div className="mb-5">
+          <div className="flex items-end gap-4 mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold text-white">
+              Frequently
+              <br />
+              Asked Questions
+            </h2>
+            <div className="hidden md:block ps-32">
+              <svg width="600" height="20" viewBox="0 0 600 20" className="text-white">
+                <path d="M0 10 L580 10 M575 5 L580 10 L575 15" stroke="currentColor" strokeWidth="2" fill="none" />
+              </svg>
+            </div>
+          </div>
+        </div>
 
-					<div className="space-y-4">
-						{faqs.map((faq, index) => (
-							<div
-								key={index}
-								className="border border-gray-200 rounded-none "
-							>
-								<div
-									onClick={() => toggleAccordion(index)}
-									className="flex justify-between items-center p-3  cursor-pointer transition-all"
-								>
-									<h3 className="text-[14px] md:text-[20px] lg:text-[20px] font-medium">
-										{faq.question}
-									</h3>
-									<IoChevronDownOutline />
-								</div>
+        {/* FAQ Items */}
+        <div className="space-y-1">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border-b border-white/20">
+              <div
+                onClick={() => toggleAccordion(index)}
+                className="flex justify-between items-center py-6 cursor-pointer group hover:bg-white/5 transition-all duration-200 px-4 -mx-4"
+              >
+                <div className="flex md:items-center">
+                  <span className="text-white/60 text-lg font-medium min-w-[3rem]">
+                    {String(index + 1).padStart(2, "0")}.
+                  </span>
+                  <h3 className="text-white text-base md:text-xl font-medium">{faq.question}</h3>
+                </div>
+                <div
+                  className={`
+                    p-[1px] md:p-2 rounded-full border border-white/30 flex items-center justify-center
+                    transition-all duration-300 ease-in-out
+                    ${openIndex === index ? "bg-white rotate-180" : "bg-transparent group-hover:bg-white/10"}
+                  `}
+                >
+                  <ChevronDown
+                    className={`w-4 h-4 md:w-5 md:h-5 transition-colors duration-300 ${
+                      openIndex === index ? "text-[#0A3161]" : "text-white"
+                    }`}
+                  />
+                </div>
+              </div>
 
-								{openIndex === index && (
-									<div className="p-4 bg-white text-xs md:text-[16px] lg:text-[16px] text-gray-900 rounded-none">
-										<p>{faq.answer}</p>
-									</div>
-								)}
-							</div>
-						))}
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+              {/* Animated Answer */}
+              <div
+                className={`
+                  overflow-hidden transition-all duration-500 ease-in-out
+                  ${openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
+                `}
+              >
+                <div className="pb-6 pt-2 pl-12 pr-4">
+                  <p className="text-gray-400 text-sm md:text-lg leading-relaxed">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

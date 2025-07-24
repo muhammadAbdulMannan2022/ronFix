@@ -14,13 +14,13 @@ export default function Services() {
     <div className="bg-[#E0F7FF] dark:bg-[#E0F7FF]">
       {/* Large Device View (Unchanged) */}
       <div className="hidden md:block">
-        <div className="text-center container mx-auto px-2 md:pt-10 md:pb-0 p-10 md:px-28">
-          <h1 className="md:text-4xl text-start font-bold text-[#003794] pb-6 md:pb-3">Services</h1>
+        <div className="text-center container mx-auto px-2 md:pt-10 md:pb-0 p-10 md:px-20">
+          <h1 className="md:text-4xl text-start font-bold text-[#16437E] pb-6 md:pb-3">Services</h1>
           <p className="text-gray-500 font-medium text-start w-1/2 md:pb-3 md:w-2/6">
             We provide a comprehensive approach to help you navigate the VA benefits process with confidence.
           </p>
         </div>
-        <div className="min-h-[90vh] md:min-h-[70vh] bg-[#E0F7FF] dark:bg-[#E0F7FF]  flex items-center justify-center">
+        <div className="min-h-[80vh] md:min-h-[70vh] bg-[#E0F7FF] dark:bg-[#E0F7FF]  flex items-center justify-center">
           <div className="max-w-7xl w-full flex items-center justify-between">
             <div className="relative">
               <div className="p-10  bg-gray-100 shadow-md rounded-full">

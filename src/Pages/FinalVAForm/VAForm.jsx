@@ -17,7 +17,7 @@ const VAForm = () => {
 
   if (!pdfs) {
     return (
-      <div className="h-screen py-20 flex flex-col items-center justify-center mx-auto">
+      <div className="h-screen  py-20 flex flex-col items-center justify-center mx-auto">
         <h2 className="text-3xl font-semibold text-gray-700">Loading...</h2>
       </div>
     );
@@ -44,10 +44,10 @@ const VAForm = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 px-4 flex flex-col items-center mx-auto w-full">
+    <div className="min-h-screen py-20 pt-32  px-4 flex flex-col items-center mx-auto w-full">
       <h2 className="text-4xl font-semibold mb-6 text-gray-800">VA Form PDFs</h2>
 
-      <div className="overflow-x-auto w-full max-w-7xl">
+      <div className="overflow-x-auto w-full md:max-w-7xl">
         <table className="table table-zebra w-full shadow-sm rounded-lg border border-gray-200">
           <thead className="bg-[#0B2A52]  text-white">
             <tr>

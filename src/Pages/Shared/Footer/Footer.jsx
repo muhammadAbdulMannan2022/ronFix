@@ -10,100 +10,71 @@ export default function Footer() {
 				<div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
 					{/* Logo & Description */}
 					<div className="lg:col-span-1">
-						<div className="flex items-center mb-6">
-							<img src={logo} alt="VALR Logo" className="h-20 w-auto" />
-						</div>
-						<p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-sm">
-							AC IS A VETERAN-OWNED ORGANIZATION DEDICATED TO SIMPLIFYING THE VA PROCESS. WHETHER YOU'VE BEEN DENIED
+						<div className="flex md:justify-start justify-center items-center mb-6">
+  <img
+    src={logo}
+    alt="VALR Logo"
+    className="h-20 w-auto"
+  />
+</div>
+
+						<p className="text-gray-300 text-center md:text-start text-sm leading-relaxed mb-6 max-w-sm">
+							VALR IS A VETERAN-OWNED ORGANIZATION DEDICATED TO SIMPLIFYING THE VA PROCESS. WHETHER YOU'VE BEEN DENIED
 							BEFORE OR NEVER APPLIED, WE'RE HERE TO FIGHT FOR YOU.
 						</p>
-						{/* Social Icons
-						<div className="flex space-x-4">
-							<a
-								href="https://facebook.com"
-								className="text-gray-400 hover:text-white transition-colors"
-								aria-label="Facebook"
-							>
-								<Facebook className="h-5 w-5" />
-							</a>
-							<a
-								href="https://linkedin.com"
-								className="text-gray-400 hover:text-white transition-colors"
-								aria-label="LinkedIn"
-							>
-								<Linkedin className="h-5 w-5" />
-							</a>
-							<a
-								href="https://instagram.com"
-								className="text-gray-400 hover:text-white transition-colors"
-								aria-label="Instagram"
-							>
-								<Instagram className="h-5 w-5" />
-							</a>
-						</div> */}
+					
 					</div>
 
 					{/* Helpful Links */}
-					<div>
-						<h3 className="text-white font-semibold text-sm mb-4 tracking-wider">HELPFUL LINKS</h3>
-						<ul className="space-y-3">
-							<li>
-								<Link to="/" className="text-gray-300 hover:text-white text-sm transition-colors">
-									HOME
-								</Link>
-							</li>
-							<li>
-								<Link to="/about" className="text-gray-300 hover:text-white text-sm transition-colors">
+					<div className="">
+						<h3 className="text-white font-semibold text-sm mb-4 text-center md:text-start tracking-wider">HELPFUL LINKS</h3>
+						<ul className="space-y-3 text-center md:text-start">
+						
+							<li >
+								<Link to="/about_us" className="text-gray-300 hover:text-white text-sm transition-colors">
 									ABOUT US
 								</Link>
 							</li>
 							<li>
-								<Link to="/contact" className="text-gray-300 hover:text-white text-sm transition-colors">
+								<a
+								 href="/#contact_us" className="text-gray-300 hover:text-white text-sm transition-colors">
 									CONTACT US
-								</Link>
+								</a>
 							</li>
 						</ul>
 					</div>
 
 					{/* Other Links */}
 					<div>
-						<h3 className="text-white font-semibold text-sm mb-4 tracking-wider">OTHER LINKS</h3>
-						<ul className="space-y-3">
-							<li>
-								<Link to="/privacy-policy" className="text-gray-300 hover:text-white text-sm transition-colors">
-									PRIVACY POLICY
-								</Link>
-							</li>
+						<h3 className="text-white font-semibold text-sm mb-4 text-center md:text-start tracking-wider">OTHER LINKS</h3>
+						<ul className="space-y-3 text-center md:text-start">
+						
 							<li>
 								<Link to="/calculator" className="text-gray-300 hover:text-white text-sm transition-colors">
 									CALCULATOR
 								</Link>
 							</li>
-							<li>
-								<Link to="/faqs" className="text-gray-300 hover:text-white text-sm transition-colors">
-									FAQS
-								</Link>
-							</li>
+							
 						</ul>
 					</div>
 
 					{/* Contact Information */}
 					<div>
-						<h3 className="text-white font-semibold text-sm mb-4 tracking-wider">CONTACT INFORMATION</h3>
-						<ul className="space-y-4">
-							<li className="flex items-center">
+						<h3 className="text-white font-semibold text-sm mb-4 tracking-wider text-center md:text-start">CONTACT INFORMATION</h3>
+						<ul className="space-y-4 ">
+							<li className="flex items-center text-center md:text-start justify-center md:justify-start">
 								<Mail className="h-4 w-4 text-red-500 mr-3 flex-shrink-0" />
 								<a
-									href="mailto:dummyemail@gmail.com"
+									href="mailto:support@valrpro.com"
 									className="text-gray-300 hover:text-white text-sm transition-colors"
 								>
-									dummyemail@gmail.com
+									support@valrpro.com
 								</a>
 							</li>
-							<li className="flex items-center">
+							<li className="flex items-center justify-center md:justify-start">
 								<Phone className="h-4 w-4 text-red-500 mr-3 flex-shrink-0" />
-								<a href="tel:12345678790" className="text-gray-300 hover:text-white text-sm transition-colors">
-									12345678790
+								<a href="tel:725-258-6118" className="text-gray-300 hover:text-white text-sm transition-colors">
+									725-258-6118
 								</a>
 							</li>
 						</ul>

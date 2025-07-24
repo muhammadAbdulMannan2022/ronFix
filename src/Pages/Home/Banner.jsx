@@ -15,7 +15,7 @@ const Banner = () => {
       >
         <div className="relative md:flex items-center justify-between mx-auto w-full py-24 pt-44">
           {/* Left Content */}
-          <div className="relative z-10 w-auto max-w-[800px] ">
+          <div className="relative z-10 w-auto max-w-[900px] ">
             {!loggedInUser || !hasSubscription ? (
               <>
               <div className="">
@@ -50,15 +50,15 @@ const Banner = () => {
               // If logged in & has subscription, show this block
               <div>
                 <div className="bg-white rounded-r-[30px] shadow-lg border border-gray-200 py-12 mt-10">
-                  <div className="ms-0 md:ms-44 py-10 px-4 md:px-0">
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#003794] uppercase leading-tight">
+                  <div className="ms-0  py-10 px-4 md:px-0">
+                    <h2 className="text-3xl px-20 md:text-4xl font-bold text-[#003794] uppercase leading-tight">
                       Let’s Get Your
                       <br />
                       <span className="text-[#003794] text-5xl md:text-9xl mt-4 inline-block">Benefits</span>
                     </h2>
                   </div>
                 </div>
-                <div className="ms-0 md:ms-44 py-10 px-4 md:px-0">
+                <div className="ms-0  py-10 px-20">
                   <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-8">
                     Congratulations! Finally, you’re one step closer to receiving the benefits you’ve rightfully earned.
                     Get the support you deserve, with no more confusion and no more waiting.
@@ -66,7 +66,7 @@ const Banner = () => {
                   </p>
                   <a
                     href="/#features"
-                    className="bg-[#003794] text-white font-semibold text-lg md:text-2xl px-6 md:px-8 py-4 md:py-5 rounded-md uppercase tracking-wide inline-block"
+                    className="bg-[#003794] text-white  font-semibold text-lg md:text-2xl px-6 py-4 md:py-5 rounded-md uppercase tracking-wide inline-block"
                   >
                     Start Your Claim Now!
                   </a>

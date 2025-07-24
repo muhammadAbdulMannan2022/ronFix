@@ -29,13 +29,13 @@ const EmpoweringVeterans = () => {
 	];
 
 	return (
-		<section className="bg-[#E0F7FF] dark:bg-[#E0F7FF] py-16 px-2 md:px-0">
-			<div className="container mx-auto text-center">
+		<section className="bg-[#E0F7FF] dark:bg-[#E0F7FF]  px-2 md:px-12">
+			<div className="md:container mx-auto text-center">
 				<h2 className="md:text-4xl text-2xl font-bold text-[#16437E] mb-8">
 					EMPOWERING VETERANS
 					<br /> THROUGH EDUCATION
 				</h2>
-				<p className="md:text-lg text-[#4B5563] mb-8 lg:w-[50%] text-center mx-auto font-semibold">
+				<p className="md:text-lg text-[#4B5563] text-base w-full mb-8 lg:w-[60%] text-center mx-auto ">
 					Education transforms lives, and we're committed to
 					empowering veterans with opportunities to learn, grow, and
 					succeed. From skill-building to career advancement, we
@@ -43,20 +43,20 @@ const EmpoweringVeterans = () => {
 					potential and shape a brighter future.
 				</p>
 
-				<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 gap-4">
+				<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 gap-4 pb-14 md:pb-12">
 					{cards.map((card, index) => (
 						<div
 							key={index}
 							className="bg-white rounded-t-lg shadow-lg overflow-hidden flex flex-col md:mb-10 "
 						>
 							<img
-								className="w-full h-62 object-cover rounded-none"
+								className="w-full h-62 object-cover "
 								src={card.imgSrc}
 								alt={card.alt}
 							/>
 							<div className="flex-1 md:p-6 p-3">
 								<div>
-									<h3 className="text-xl font-semibold text-gray-800 mb-4 md:text-start text-center">
+									<h3 className="text-xl font-semibold text-[#16437E] mb-4 md:text-start text-center">
 										{card.title}
 									</h3>
 									<p className="text-gray-600 text-[16px]  md:text-base md:text-start text-center">

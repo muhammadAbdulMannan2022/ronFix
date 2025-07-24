@@ -15,14 +15,14 @@ const FeaturesCard = () => {
   return (
     <div 
     id="features"
-    className="bg-[#fff] md:pt-10 md:pb-10 ">
+    className="bg-[#E0F7FF] dark:bg-[#E0F7FF] md:pt-10 md:pb-10 pb-16">
       <div className="md:bg-[url('https://i.ibb.co/mV4kpQdX/Group-1.png')] bg-cover bg-center bg-no-repeat min-h-[50vh] md:min-h-[90vh]">
         <div className="flex flex-col md:flex-row md:justify-center md:items-center md:gap-8 min-h-[50vh] md:min-h-[90vh] px-4 md:px-0">
           {/* Image Section (Moved to bottom,on mobile, left on md) */}
           <div className="basis-full md:basis-8/12 flex justify-center md:justify-center mt-6 md:mt-6 order-2 md:order-1">
             <img
               src="https://i.ibb.co/V0H3JRyk/Group-2147226323.png"
-              className=" h-auto md:w-[900px] md:h-[800px] mt-7"
+              className=" h-auto w-full md:w-[900px] md:h-[800px] mt-7"
               alt="Features Graphic"
             />
           </div>

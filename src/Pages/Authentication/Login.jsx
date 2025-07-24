@@ -55,7 +55,9 @@ const Login = () => {
 			}, 1000);
 		} catch (error) {
 			console.log("error", error);
-			toast.error(`Something went wrong!`, {
+			  const errorMessage = error?.data?.non_field_errors || "Something went wrong!";
+
+			toast.error(errorMessage, {
 				id: toastId,
 				duration: 2000,
 			});
@@ -93,7 +95,7 @@ const Login = () => {
 					<input
 						type="email"
 						id="email"
-						className="w-full p-3 border bg-white border-gray-300 rounded-lg mt-2 text-black"
+						className="w-full p-3 border bg-white dark:bg-white border-gray-300 rounded-lg mt-2 text-black"
 						placeholder="Enter Email"
 						{...register("email", {
 							required: "Email is required",
@@ -118,7 +120,7 @@ const Login = () => {
 						<input
 							type={showPassword ? "text" : "password"}
 							id="password"
-							className="w-full p-3 border bg-white border-gray-300 rounded-lg text-black"
+							className="w-full p-3 border bg-white dark:bg-white border-gray-300 rounded-lg text-black"
 							placeholder="Enter Password"
 							{...register("password", {
 								required: "Password is required",
