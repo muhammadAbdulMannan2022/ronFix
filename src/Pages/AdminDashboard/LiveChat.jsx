@@ -1,289 +1,254 @@
-import {  Search, Send, MoreVertical } from "lucide-react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetActiveChatsQuery } from "../../redux/features/baseApi";
+import React, { useState, useEffect, useRef } from "react";
+import { Search, Send, MoreVertical } from "lucide-react";
+import {
+	useGetActiveChatsQuery,
+	useGetLoggedUserQuery,
+	useGetMessagesQuery,
+	useSendMessageMutation,
+} from "../../redux/features/baseApi";
+import { db } from "../../firebase/firebase.config";
+import { ref, onChildAdded, onChildChanged, onChildRemoved, off } from "firebase/database";
+import { HiOutlineChatAlt2 } from "react-icons/hi";
+
+// A safer time formatting function
+const formatTime = (dateString) => {
+	try {
+		const date = new Date(dateString);
+		if (isNaN(date.getTime())) return "";
+		return date.toLocaleTimeString("en-US", {
+			hour: "numeric",
+			minute: "2-digit",
+			hour12: true,
+		});
+	} catch (e) {
+		return "";
+	}
+};
+
+const ChatListItem = React.memo(({ chat, selectedChatId, handleSelectChat }) => (
+	<div
+		className={`p-4 border-b cursor-pointer hover:bg-gray-50 transition-colors ${selectedChatId === chat.firebase_chat_id ? "bg-blue-50 border-l-4 border-l-blue-500" : ""}`}
+		onClick={() => handleSelectChat(chat.firebase_chat_id)}
+	>
+		<div className="flex items-center space-x-3">
+			<div className="avatar placeholder">
+				<div className="bg-neutral text-neutral-content rounded-full w-10">
+					<span className="text-xl">{chat.user_name ? chat.user_name.charAt(0).toUpperCase() : '?'}</span>
+				</div>
+			</div>
+			<div className="flex-1 min-w-0">
+				<p className="text-sm font-medium text-gray-900 truncate">{chat.user_name || "Unknown User"}</p>
+				<p className="text-xs text-gray-600 truncate">{chat.subject?.subject || "No Subject"}</p>
+				<p className="text-xs text-gray-400">{formatTime(chat.last_message_at)}</p>
+			</div>
+		</div>
+	</div>
+));
 
 const LiveChat = () => {
-	const navigate = useNavigate();
-	const { data: { active_chats } = [] } =
-		useGetActiveChatsQuery();
-	console.log(fetchedActiveUsers);
 	const [searchTerm, setSearchTerm] = useState("");
-	const [selectedUserId, setSelectedUserId] = useState("1");
 	const [newMessage, setNewMessage] = useState("");
+	const [selectedChatId, setSelectedChatId] = useState(null);
+	const [messages, setMessages] = useState([]);
+	const [activeChats, setActiveChats] = useState([]);
+	const displayedMessageIds = useRef(new Set());
+	const messagesEndRef = useRef(null);
 
-	// Mock data for users
-	const users = [
-		{
-			firebase_chat_id: "chat_a1b2c3d4e5f6g7h8",
-			user_id: 123,
-			user_name: "john_doe",
-			subject: "Login Issues",
-			status: "in_progress",
-			last_message_at: "2025-07-01T10:45:00Z"
-		},
-		{
-			firebase_chat_id: "chat_b2c3d4e5f6g7h8i9",
-			user_id: 124,
-			user_name: "jane_smith",
-			subject: "Payment Problem",
-			status: "open",
-			last_message_at: "2025-07-01T10:20:00Z"
-		},
-		{
-			firebase_chat_id: "chat_c3d4e5f6g7h8i9j0",
-			user_id: 125,
-			user_name: "mike_wilson",
-			subject: "Feature Request",
-			status: "open",
-			last_message_at: "2025-07-01T09:55:00Z",
+	// --- RTK QUERY HOOKS ---
+	// Added pollingInterval to refetch every 3 seconds
+	const { data: initialChatsData, isLoading: isLoadingInitialChats } = useGetActiveChatsQuery(undefined, {
+		pollingInterval: 3000, // Refetch every 3 seconds
+	});
+	const { data: loggedUserData } = useGetLoggedUserQuery();
+	const { data: fetchedMessages, isLoading: isLoadingMessages } = useGetMessagesQuery(selectedChatId, { skip: !selectedChatId });
+	const [sendMessage] = useSendMessageMutation();
+	const adminUserId = loggedUserData?.id;
+
+	// EFFECT 1: Set initial chats list from API and listen for real-time updates
+	useEffect(() => {
+		if (initialChatsData?.active_chats) {
+			setActiveChats(initialChatsData.active_chats);
 		}
-	];
 
-	// Mock data for messages
-	const message = [
-		{
-			id: "1",
-			senderId: "1",
-			text: "Hi there! I need help with my account verification.",
-			timestamp: "10:30 AM",
-			isAdmin: false,
-		},
-		{
-			id: "2",
-			senderId: "admin",
-			text: "Hello! I'd be happy to help you with account verification. Can you please tell me what specific issue you're experiencing?",
-			timestamp: "10:32 AM",
-			isAdmin: true,
-		},
-		{
-			id: "3",
-			senderId: "1",
-			text: "I uploaded my documents yesterday but the status still shows pending.",
-			timestamp: "10:33 AM",
-			isAdmin: false,
-		},
-	];
+		const activeChatsRef = ref(db, 'active_support_chats');
+		const handleChildAdded = onChildAdded(activeChatsRef, (snapshot) => {
+			const newChat = { firebase_chat_id: snapshot.key, ...snapshot.val() };
+			setActiveChats(currentChats => currentChats.some(c => c.firebase_chat_id === newChat.firebase_chat_id) ? currentChats : [...currentChats, newChat]);
+		});
+		const handleChildChanged = onChildChanged(activeChatsRef, (snapshot) => {
+			const updatedData = { firebase_chat_id: snapshot.key, ...snapshot.val() };
+			setActiveChats(currentChats => currentChats.map(chat => chat.firebase_chat_id === updatedData.firebase_chat_id ? updatedData : chat));
+		});
+		const handleChildRemoved = onChildRemoved(activeChatsRef, (snapshot) => {
+			const removedChatId = snapshot.key;
+			setActiveChats(currentChats => currentChats.filter(chat => chat.firebase_chat_id !== removedChatId));
+			if (selectedChatId === removedChatId) setSelectedChatId(null);
+		});
 
-	const filteredUsers = users.filter(
-		(user) =>
-			user.user_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-			user.email.toLowerCase().includes(searchTerm.toLowerCase())
-	);
+		return () => {
+			off(activeChatsRef, 'child_added', handleChildAdded);
+			off(activeChatsRef, 'child_changed', handleChildChanged);
+			off(activeChatsRef, 'child_removed', handleChildRemoved);
+		};
+	}, [initialChatsData, selectedChatId]);
 
-	const selectedUser = users.find((user) => user.id === selectedUserId);
+	// EFFECT 2: Load historical messages for a selected chat
+	useEffect(() => {
+		if (fetchedMessages?.messages && adminUserId) {
+			const formatted = fetchedMessages.messages.map(m => ({
+				id: m.firebase_message_id,
+				content: m.content,
+				timestamp: new Date(m.timestamp),
+				isSentByAdmin: m.sender.id === adminUserId,
+			}));
+			setMessages(formatted);
+			displayedMessageIds.current.clear();
+			formatted.forEach(m => displayedMessageIds.current.add(m.id));
+		}
+	}, [fetchedMessages, adminUserId]);
 
-	const handleSendMessage = () => {
-		if (newMessage.trim()) {
-			// Here you would normally send the message to your backend
-			console.log("Sending message:", newMessage);
-			setNewMessage("");
+	// EFFECT 3: Real-time listener for NEW messages in the selected chat
+	useEffect(() => {
+		if (db && selectedChatId) {
+			const messagesRef = ref(db, `support_chats/${selectedChatId}/messages`);
+			const handleMessageAdded = onChildAdded(messagesRef, (snapshot) => {
+				const messageData = snapshot.val();
+				const messageId = snapshot.key;
+
+				if (messageData && !displayedMessageIds.current.has(messageId)) {
+					displayedMessageIds.current.add(messageId);
+					const isMessageSentByAdmin = messageData.senderType === "admin";
+
+					const newMessage = {
+						id: messageId,
+						content: messageData.content,
+						timestamp: new Date(messageData.timestamp),
+						isSentByAdmin: isMessageSentByAdmin,
+					};
+
+					// Replace the optimistic message with the real one
+					setMessages(prev => [...prev.filter(m => !m.optimistic), newMessage]);
+				}
+			});
+			return () => off(messagesRef, 'child_added', handleMessageAdded);
+		}
+	}, [selectedChatId]);
+
+	// EFFECT 4: Auto-scrolling to the bottom
+	useEffect(() => {
+		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+	}, [messages]);
+
+	const handleSelectChat = (firebaseChatId) => {
+		setMessages([]);
+		displayedMessageIds.current.clear();
+		setSelectedChatId(firebaseChatId);
+	};
+
+	// Updated to handle optimistic UI
+	const handleSendMessage = async () => {
+		if (!newMessage.trim() || !selectedChatId) return;
+
+		const messageToSend = newMessage;
+		const tempId = `optimistic-${Date.now()}`; // Unique temporary ID
+
+		// Optimistic UI Update
+		const optimisticMessage = {
+			id: tempId,
+			content: messageToSend,
+			timestamp: new Date(),
+			isSentByAdmin: true, // Assuming admin is always the sender here
+			optimistic: true, // Flag to identify the optimistic message
+		};
+
+		setMessages(prev => [...prev, optimisticMessage]);
+		setNewMessage("");
+
+		try {
+			await sendMessage({ chatId: selectedChatId, message: messageToSend }).unwrap();
+			// The Firebase listener will replace the optimistic message
+		} catch (error) {
+			console.error("Failed to send message:", error);
+			// If sending fails, remove the optimistic message and restore the input
+			setMessages(prev => prev.filter(m => m.id !== tempId));
+			setNewMessage(messageToSend);
 		}
 	};
 
-	const handleKeyPress = (e) => {
-		if (e.key === "Enter" && !e.shiftKey) {
-			e.preventDefault();
-			handleSendMessage();
-		}
-	};
+	const filteredChats = Array.isArray(activeChats) ? activeChats.filter(chat =>
+		chat.user_name && chat.user_name.toLowerCase().includes(searchTerm.toLowerCase())
+	) : [];
+	const selectedChatDetails = Array.isArray(activeChats) ? activeChats.find(chat => chat.firebase_chat_id === selectedChatId) : null;
 
 	return (
 		<div className="w-full h-full bg-gray-50">
-			{/* Header */}
-			{/* <header className="bg-white shadow-sm border-b">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="flex items-center justify-between py-4">
-						<div className="flex items-center space-x-4">
-							<button
-								onClick={() => navigate("/")}
-								className="p-2 hover:bg-gray-100 rounded-md transition-colors"
-							>
-								<ArrowLeft className="h-5 w-5" />
-							</button>
-							<div className="flex items-center space-x-3">
-								<div className="bg-blue-600 p-2 rounded-lg">
-									<div className="text-white font-bold text-lg">
-										V
-									</div>
-								</div>
-								<h1 className="text-2xl font-bold text-gray-900">
-									Live Chat Management
-								</h1>
-							</div>
-						</div>
-					</div>
-				</div>
-			</header> */}
-
 			<div className="w-full h-full sm:px-6 lg:px-8">
 				<div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-[calc(100vh-150px)]">
-					{/* Users List */}
-					<div className="lg:col-span-1 bg-white rounded-lg border shadow-sm">
-						<div className="p-4 border-b">
-							<h2 className="text-lg font-semibold text-gray-900 mb-4">
-								Active Users
-							</h2>
-							<div className="sticky">
+					{/* Chat List */}
+					<div className="lg:col-span-1 bg-white rounded-lg border shadow-sm flex flex-col">
+						<div className="p-4 border-b flex-shrink-0">
+							<h2 className="text-lg font-semibold text-gray-900 mb-4">Active Chats</h2>
+							<div className="relative">
 								<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-								<input
-									type="text"
-									placeholder="Search users..."
-									className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-									value={searchTerm}
-									onChange={(e) =>
-										setSearchTerm(e.target.value)
-									}
-								/>
+								<input type="text" placeholder="Search users..." className="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
 							</div>
 						</div>
-						<div className="overflow-y-auto max-h-[calc(100vh-320px)]">
-							{filteredUsers.map((user) => (
-								<div
-									key={user.id}
-									className={`p-4 border-b cursor-pointer hover:bg-gray-50 transition-colors ${
-										selectedUserId === user.id
-											? "bg-blue-50 border-blue-200"
-											: ""
-									}`}
-									onClick={() => setSelectedUserId(user.id)}
-								>
-									<div className="flex items-center space-x-3">
-										<div className="relative">
-											<img
-												src={"https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
-												alt={user.user_name}
-												className="w-10 h-10 rounded-full object-cover"
-											/>
-											<div
-												className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white ${
-													user.isOnline
-														? "bg-green-500"
-														: "bg-gray-400"
-												}`}
-											/>
-										</div>
-										<div className="flex-1 min-w-0">
-											<div className="flex items-center justify-between">
-												<p className="text-sm font-medium text-gray-900 truncate">
-													{user.user_name}
-												</p>
-												{/* {user.unreadCount > 0 && (
-													<span className="bg-blue-600 text-white text-xs rounded-full px-2 py-1 min-w-[20px] text-center">
-														{user.unreadCount}
-													</span>
-												)} */}
-											</div>
-											<p className="text-xs text-gray-500 truncate">
-												{/* {user.} */}
-											</p>
-											<p className="text-xs text-gray-400 truncate">
-											</p>
-											<p className="text-xs text-gray-400">
-												{user.last_message_at}
-											</p>
-										</div>
-									</div>
-								</div>
-							))}
+						<div className="overflow-y-auto flex-1">
+							{isLoadingInitialChats && activeChats.length === 0 ? (<div>Loading Chats...</div>) :
+								(filteredChats.map((chat) => (
+									<ChatListItem
+										key={chat.firebase_chat_id}
+										chat={chat}
+										selectedChatId={selectedChatId}
+										handleSelectChat={handleSelectChat}
+									/>
+								)))}
 						</div>
 					</div>
 
 					{/* Chat Area */}
-					<div className="lg:col-span-3 bg-white rounded-lg border shadow-sm flex flex-col">
-						{selectedUser ? (
+					<div className="lg:col-span-3 bg-white rounded-lg border shadow-sm flex flex-col h-full">
+						{selectedChatDetails ? (
 							<>
-								{/* Chat Header */}
-								<div className="p-4 border-b flex items-center justify-between">
+								<div className="p-4 border-b flex items-center justify-between flex-shrink-0">
 									<div className="flex items-center space-x-3">
-										<div className="relative">
-											<img
-												src={"https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
-												alt={selectedUser.name}
-												className="w-10 h-10 rounded-full object-cover"
-											/>
-											<div
-												className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white ${
-													selectedUser.isOnline
-														? "bg-green-500"
-														: "bg-gray-400"
-												}`}
-											/>
-										</div>
+										<div className="avatar placeholder"><div className="bg-neutral text-neutral-content rounded-full w-10"><span className="text-xl">{selectedChatDetails.user_name ? selectedChatDetails.user_name.charAt(0).toUpperCase() : '?'}</span></div></div>
 										<div>
-											<h3 className="text-lg font-semibold text-gray-900">
-												{selectedUser.name}
-											</h3>
-											<p className="text-sm text-gray-500">
-												{selectedUser.isOnline
-													? "Online"
-													: "Offline"}
-											</p>
+											<h3 className="text-lg font-semibold text-gray-900">{selectedChatDetails.user_name || "Unknown User"}</h3>
+											<p className="text-sm text-gray-500">{selectedChatDetails.subject?.subject || "No Subject"}</p>
 										</div>
 									</div>
-									<button className="p-2 hover:bg-gray-100 rounded-md transition-colors">
-										<MoreVertical className="h-5 w-5 text-gray-500" />
-									</button>
+									<button className="p-2 hover:bg-gray-100 rounded-md transition-colors"><MoreVertical className="h-5 w-5 text-gray-500" /></button>
 								</div>
 
-								{/* Messages */}
 								<div className="flex-1 overflow-y-auto p-4 space-y-4">
-									{messages.map((message) => (
-										<div
-											key={message.id}
-											className={`flex ${message.isAdmin ? "justify-end" : "justify-start"}`}
-										>
-											<div
-												className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-													message.isAdmin
-														? "bg-blue-600 text-white"
-														: "bg-gray-100 text-gray-900"
-												}`}
-											>
-												<p className="text-sm">
-													{message.text}
-												</p>
-												<p
-													className={`text-xs mt-1 ${
-														message.isAdmin
-															? "text-blue-100"
-															: "text-gray-500"
-													}`}
-												>
-													{message.timestamp}
-												</p>
-											</div>
-										</div>
-									))}
+									{isLoadingMessages ? (<div className="flex justify-center items-center h-full">Loading...</div>) :
+										(<>
+											{messages.map((message) => (
+												<div key={message.id} className={`flex ${message.isSentByAdmin ? "justify-end" : "justify-start"}`}>
+													<div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg shadow-sm ${message.isSentByAdmin ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-900"} ${message.optimistic ? "opacity-60" : ""}`}>
+														<p className="text-sm">{message.content}</p>
+														<p className={`text-xs text-right mt-1 ${message.isSentByAdmin ? "text-blue-100" : "text-gray-500"}`}>{formatTime(message.timestamp)}</p>
+													</div>
+												</div>
+											))}
+											<div ref={messagesEndRef} />
+										</>)}
 								</div>
 
-								{/* Message Input */}
-								<div className="p-4 border-t">
+								<div className="p-4 border-t bg-gray-50 flex-shrink-0">
 									<div className="flex space-x-2">
-										<textarea
-											value={newMessage}
-											onChange={(e) =>
-												setNewMessage(e.target.value)
-											}
-											onKeyPress={handleKeyPress}
-											placeholder="Type your message..."
-											className="flex-1 resize-none border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-											rows={1}
-										/>
-										<button
-											onClick={handleSendMessage}
-											className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors inline-flex items-center justify-center"
-										>
-											<Send className="h-4 w-4" />
-										</button>
+										<textarea value={newMessage} onChange={(e) => setNewMessage(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleSendMessage())} placeholder="Type your message..." className="flex-1 resize-none border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" rows={1} />
+										<button onClick={handleSendMessage} disabled={!newMessage.trim()} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors inline-flex items-center justify-center disabled:opacity-50"><Send className="h-4 w-4" /></button>
 									</div>
 								</div>
 							</>
 						) : (
 							<div className="flex-1 flex items-center justify-center">
-								<p className="text-gray-500">
-									Select a user to start chatting
-								</p>
+								<div className="text-center">
+									<HiOutlineChatAlt2 className="mx-auto text-6xl text-gray-300" />
+									<p className="text-gray-500 mt-2">Select a chat to see the conversation</p>
+								</div>
 							</div>
 						)}
 					</div>

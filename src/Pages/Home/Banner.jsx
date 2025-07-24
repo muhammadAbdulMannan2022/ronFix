@@ -8,14 +8,14 @@ const Banner = () => {
     <section className="relative">
       {/* ===== Desktop & Tablet View ===== */}
       <div
-        className="hidden md:flex bg-cover bg-center bg-no-repeat min-h-auto items-center justify-between pb-40 pt-32"
+        className="hidden md:flex bg-cover bg-center bg-no-repeat min-h-auto items-center justify-between pb-10 pt-22 h-[90%]"
         style={{
           backgroundImage: "url('https://i.ibb.co/1GFVFjRz/Desktop-9.png')",
         }}
       >
-        <div className="relative md:flex items-center justify-between mx-auto w-full py-24">
+        <div className="relative md:flex items-center justify-between mx-auto w-full pb-16 pt-32">
           {/* Left Content */}
-          <div className="relative z-10 w-auto max-w-[800px]">
+          <div className="relative z-10 w-auto mt-10 max-w-[800px]">
             {!loggedInUser || !hasSubscription ? (
               <>
                 <div className="bg-[#FFFFFF] rounded-tr-[50px] shadow-lg ">
@@ -38,8 +38,8 @@ const Banner = () => {
                 </div>
                 <div className="uppercase font-semibold mt-3 ps-44">
                   <a
-                  href="/#pricing_plan"
-                  to="/plan" className="uppercase text-3xl bg-[#003794] text-[#FFFFFF] p-4 px-10 rounded-md">
+                    href="/#pricing_plan"
+                    to="/plan" className="uppercase text-3xl bg-[#003794] text-[#FFFFFF] p-4 px-10 rounded-md">
                     get started!
                   </a>
                 </div>

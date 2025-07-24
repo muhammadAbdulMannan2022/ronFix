@@ -6,7 +6,6 @@ import {
 	User,
 	MessageSquare,
 	Send,
-	Loader2,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -121,8 +120,19 @@ export default function ContactForm() {
 								</label>
 								<input
 									{...register("first_name", {
-										required:
-											"Please enter your first name",
+										required: "Please enter your first name",
+										pattern: {
+											value: /^[A-Za-z\s]+$/,
+											message: "First name should only contain letters and spaces",
+										},
+										minLength: {
+											value: 2,
+											message: "First name must be at least 2 characters",
+										},
+										maxLength: {
+											value: 50,
+											message: "First name cannot exceed 50 characters",
+										},
 									})}
 									className={`w-full p-2 text-sm bg-white text-[#003794] border rounded ${errors.first_name ? "border-red-400" : "border-gray-300"}`}
 									placeholder="Your first name"
@@ -140,6 +150,18 @@ export default function ContactForm() {
 								<input
 									{...register("last_name", {
 										required: "Please enter your last name",
+										pattern: {
+											value: /^[A-Za-z\s]+$/,
+											message: "Last name should only contain letters and spaces",
+										},
+										minLength: {
+											value: 2,
+											message: "Last name must be at least 2 characters",
+										},
+										maxLength: {
+											value: 50,
+											message: "Last name cannot exceed 50 characters",
+										},
 									})}
 									className={`w-full p-2 text-sm bg-white text-[#003794] border rounded ${errors.last_name ? "border-red-400" : "border-gray-300"}`}
 									placeholder="Your last name"
@@ -161,9 +183,12 @@ export default function ContactForm() {
 								{...register("email", {
 									required: "We need your email to reach you",
 									pattern: {
-										value: /^\S+@\S+\.\S+$/,
-										message:
-											"Please use a valid email address",
+										value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+										message: "Please use a valid email address",
+									},
+									maxLength: {
+										value: 100,
+										message: "Email cannot exceed 100 characters",
 									},
 								})}
 								className={`w-full p-2 text-sm border bg-white text-[#003794] rounded ${errors.email ? "border-red-400" : "border-gray-300"}`}
@@ -184,6 +209,10 @@ export default function ContactForm() {
 								type="tel"
 								{...register("phone", {
 									required: "Please provide a phone number",
+									pattern: {
+										value: /^\d{10,15}$/,
+										message: "Phone number must be 10-15 digits",
+									},
 								})}
 								className={`w-full p-2 text-sm border bg-white text-[#003794] rounded ${errors.phone ? "border-red-400" : "border-gray-300"}`}
 								placeholder="Your phone number"
@@ -202,6 +231,14 @@ export default function ContactForm() {
 							<textarea
 								{...register("message", {
 									required: "Let us know how we can help",
+									minLength: {
+										value: 10,
+										message: "Message must be at least 10 characters",
+									},
+									maxLength: {
+										value: 1000,
+										message: "Message cannot exceed 1000 characters",
+									},
 								})}
 								className={`w-full p-2 text-sm border bg-white text-[#003794] rounded min-h-[100px] md:min-h-[120px] resize-none ${errors.message ? "border-red-400" : "border-gray-300"}`}
 								placeholder="Tell us how we can assist you..."

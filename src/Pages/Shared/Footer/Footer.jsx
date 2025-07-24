@@ -1,136 +1,132 @@
-
-import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
-import logo from "../../../assets/VALR_logo.png";
-import { IoMailOutline } from "react-icons/io5";
-import { BsTelephone } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import logo from "../../../assets/VALR_logo.png"
+import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react"
 
 export default function Footer() {
 	return (
-		<footer className="bg-[#152A45] text-white py-10 px-4 md:px-6">
-			<div className="container mx-auto">
-				{/* Top Section */}
-				<div className="flex flex-col md:flex-row md:justify-between md:items-start gap-10">
+		<footer className="bg-[#1a2332] text-white">
+			<div className="container mx-auto px-5 md:px-20 py-12 lg:py-16">
+				{/* Main Content */}
+				<div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
 					{/* Logo & Description */}
-					<div className="text-center md:text-left">
-						<img
-							src={logo}
-							alt="logo"
-							className="mx-auto md:mx-0 h-[75px] w-[90px] mb-5"
-						/>
-						<p className="text-gray-300 text-sm max-w-xs md:max-w-md mx-auto md:mx-0">
-							Valr is a veteran-owned organization dedicated to
-							simplifying the VA process. Whether you’ve been
-							denied before or never applied, we’re here to fight
-							for you.
+					<div className="lg:col-span-1">
+						<div className="flex items-center mb-6">
+							<img src={logo} alt="VALR Logo" className="h-20 w-auto" />
+						</div>
+						<p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-sm">
+							AC IS A VETERAN-OWNED ORGANIZATION DEDICATED TO SIMPLIFYING THE VA PROCESS. WHETHER YOU'VE BEEN DENIED
+							BEFORE OR NEVER APPLIED, WE'RE HERE TO FIGHT FOR YOU.
 						</p>
-
-						{/* Social Icons */}
-						<div className="flex justify-center md:justify-start space-x-4 mt-4">
+						{/* Social Icons
+						<div className="flex space-x-4">
 							<a
 								href="https://facebook.com"
-								className="text-gray-300 hover:text-white"
+								className="text-gray-400 hover:text-white transition-colors"
+								aria-label="Facebook"
 							>
-								<FaFacebookF className="h-5 w-5" />
+								<Facebook className="h-5 w-5" />
 							</a>
 							<a
 								href="https://linkedin.com"
-								className="text-gray-300 hover:text-white"
+								className="text-gray-400 hover:text-white transition-colors"
+								aria-label="LinkedIn"
 							>
-								<FaLinkedinIn className="h-5 w-5" />
+								<Linkedin className="h-5 w-5" />
 							</a>
 							<a
 								href="https://instagram.com"
-								className="text-gray-300 hover:text-white"
+								className="text-gray-400 hover:text-white transition-colors"
+								aria-label="Instagram"
 							>
-								<FaInstagram className="h-5 w-5" />
+								<Instagram className="h-5 w-5" />
 							</a>
-						</div>
+						</div> */}
 					</div>
 
-					{/* Helpful Links & Contact Info */}
-					<div className="grid grid-cols-1 text-center md:text-start sm:grid-cols-2 md:grid-cols-2 gap-8">
-						{/* Helpful Links */}
-						<div>
-							<h3 className="text-base font-semibold mb-3 underline">
-								HELPFUL LINKS
-							</h3>
-							<ul className="space-y-2 text-sm text-gray-300">
-								<li>
-									<Link
-										to="/about_us"
-										className="hover:text-white"
-									>
-										About us
-									</Link>
-								</li>
-							
-								<li>
-									<Link
-										to="/contact"
-										className="hover:text-white"
-									>
-										Contact us
-									</Link>
-								</li>
-							</ul>
-						</div>
+					{/* Helpful Links */}
+					<div>
+						<h3 className="text-white font-semibold text-sm mb-4 tracking-wider">HELPFUL LINKS</h3>
+						<ul className="space-y-3">
+							<li>
+								<Link to="/" className="text-gray-300 hover:text-white text-sm transition-colors">
+									HOME
+								</Link>
+							</li>
+							<li>
+								<Link to="/about" className="text-gray-300 hover:text-white text-sm transition-colors">
+									ABOUT US
+								</Link>
+							</li>
+							<li>
+								<Link to="/contact" className="text-gray-300 hover:text-white text-sm transition-colors">
+									CONTACT US
+								</Link>
+							</li>
+						</ul>
+					</div>
 
-						{/* Contact Info */}
-						<div>
-							<h3 className="text-base  font-semibold mb-3 underline">
-								CONTACT INFORMATION
-							</h3>
-							<ul className="space-y-3 text-sm  text-gray-300">
-								<li className="flex items-center justify-center md:justify-start">
-									<IoMailOutline className="text-sm text-white" />
-									<a
-										href="mailto:support@valrpro.com"
-										className="hover:text-white text-sm  "
-									>
-										  <span className="ms-2 flex">support@valrpro.com</span>
-									</a>
-								</li>
-								<li className="flex items-center justify-center md:justify-start">
-									<BsTelephone className="mr-2 text-white" />
-									<a
-										href="tel:7252586118"
-										className="hover:text-white"
-									>
-										725-258-6118
-									</a>
-								</li>
-							</ul>
-						</div>
+					{/* Other Links */}
+					<div>
+						<h3 className="text-white font-semibold text-sm mb-4 tracking-wider">OTHER LINKS</h3>
+						<ul className="space-y-3">
+							<li>
+								<Link to="/privacy-policy" className="text-gray-300 hover:text-white text-sm transition-colors">
+									PRIVACY POLICY
+								</Link>
+							</li>
+							<li>
+								<Link to="/calculator" className="text-gray-300 hover:text-white text-sm transition-colors">
+									CALCULATOR
+								</Link>
+							</li>
+							<li>
+								<Link to="/faqs" className="text-gray-300 hover:text-white text-sm transition-colors">
+									FAQS
+								</Link>
+							</li>
+						</ul>
+					</div>
+
+					{/* Contact Information */}
+					<div>
+						<h3 className="text-white font-semibold text-sm mb-4 tracking-wider">CONTACT INFORMATION</h3>
+						<ul className="space-y-4">
+							<li className="flex items-center">
+								<Mail className="h-4 w-4 text-red-500 mr-3 flex-shrink-0" />
+								<a
+									href="mailto:dummyemail@gmail.com"
+									className="text-gray-300 hover:text-white text-sm transition-colors"
+								>
+									dummyemail@gmail.com
+								</a>
+							</li>
+							<li className="flex items-center">
+								<Phone className="h-4 w-4 text-red-500 mr-3 flex-shrink-0" />
+								<a href="tel:12345678790" className="text-gray-300 hover:text-white text-sm transition-colors">
+									12345678790
+								</a>
+							</li>
+						</ul>
 					</div>
 				</div>
 
 				{/* Divider */}
-				<div className="border-t border-gray-600 my-6"></div>
+				<div className="border-t border-gray-600 my-8"></div>
 
 				{/* Disclaimer */}
-				<p className="text-center text-[11px] text-gray-400 w-full container mx-auto leading-relaxed px-2">
-					<span className="text-red-700 font-semibold">
-						Disclaimer:
-					</span>
-					  VARL is not an accredited agent and/or a pool of
-					attorneys, law firm or law office. It is not an accredited
-					or recognized VA claim agent nor is it an individual or
-					entity that is allowed and accredited by the VA to represent
-					any and all of its Affiliates. Vac2023 does NOT represent
-					veterans before the VA or BVA in connection with any claim
-					for VA disability benefits. Veterans are appraised that
-					there are free resources available to aid them in the
-					applications they have before Department of Veterans Affairs
-					(VA) such as but not limited to the preparation, filing,
-					presentation and processing of the VA disability claim.
-					<br />
-					<span className="block mt-2">
-					© {new Date().getFullYear()} VALR. All Rights Reserved.
-					</span>
-
-				</p>
+				<div className="text-center">
+					<p className="text-gray-400 text-xs leading-relaxed max-w-4xl mx-auto">
+						<span className="text-red-500 font-semibold">DISCLAIMER:</span> VARL IS NOT AN ACCREDITED AGENT AND/OR A
+						POOL OF ATTORNEYS, LAW FIRM OR LAW OFFICE. IT IS NOT AN ACCREDITED OR RECOGNIZED VA CLAIM AGENT NOR IS IT AN
+						INDIVIDUAL OR ENTITY THAT IS ALLOWED AND ACCREDITED BY THE VA TO REPRESENT ANY AND ALL OF ITS AFFILIATES.
+						VAC2023 DOES NOT REPRESENT VETERANS BEFORE THE VA OR BVA IN CONNECTION WITH ANY CLAIM FOR VA DISABILITY
+						BENEFITS. VETERANS ARE APPRAISED THAT THERE ARE FREE RESOURCES AVAILABLE TO AID THEM IN THE APPLICATIONS
+						THEY HAVE BEFORE DEPARTMENT OF VETERANS AFFAIRS (VA) SUCH AS BUT NOT LIMITED TO THE PREPARATION, FILING,
+						PRESENTATION AND PROCESSING OF THE VA DISABILITY CLAIM.
+					</p>
+					<p className="text-gray-500 text-xs mt-4">© {new Date().getFullYear()} VALR. All Rights Reserved.</p>
+				</div>
 			</div>
 		</footer>
-	);
+	)
 }

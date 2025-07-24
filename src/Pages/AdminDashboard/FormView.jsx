@@ -11,9 +11,9 @@ export default function FormView() {
   const [selectedSubmission, setSelectedSubmission] = useState(null);
   const [approvedForm, { isLoading: isApproving }] = useApprovedFormMutation();
   const [rejectForm, { isLoading: isRejecting }] = useRejectFormMutation();
-  const [isActionTaken, setIsActionTaken] = useState(false); 
+  const [isActionTaken, setIsActionTaken] = useState(false);
 
-  const baseURL = "https://ronvergara.duckdns.org";
+  const baseURL = "http://10.10.13.73:5000";
 
   console.log("formData", formData);
 
@@ -59,9 +59,9 @@ export default function FormView() {
 
   const getFileName = (filePath) => {
     if (!filePath) return "Unknown File";
-    const fileName = filePath.split("/").pop(); 
-    const nameWithoutTimestamp = fileName.replace(/^\d{8}_\d{6}_/, ""); 
-    return nameWithoutTimestamp.replace(/\.pdf$/, ""); 
+    const fileName = filePath.split("/").pop();
+    const nameWithoutTimestamp = fileName.replace(/^\d{8}_\d{6}_/, "");
+    return nameWithoutTimestamp.replace(/\.pdf$/, "");
   };
 
   return (
@@ -111,13 +111,12 @@ export default function FormView() {
                   <td className="py-3 px-4">{submission?.user?.email || "N/A"}</td>
                   <td className="py-3 px-4">
                     <span
-                      className={`badge ${
-                        submission?.status === "approved"
+                      className={`badge ${submission?.status === "approved"
                           ? "bg-green-500 text-white"
                           : submission?.status === "rejected"
-                          ? "bg-red-500 text-white"
-                          : "bg-yellow-500 text-white"
-                      } px-2 py-1 rounded-full`}
+                            ? "bg-red-500 text-white"
+                            : "bg-yellow-500 text-white"
+                        } px-2 py-1 rounded-full`}
                     >
                       {submission?.status || "pending"}
                     </span>
@@ -125,10 +124,10 @@ export default function FormView() {
                   <td className="py-3 px-4">
                     {submission?.submission_date
                       ? new Date(submission.submission_date).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })
                       : "N/A"}
                   </td>
                   <td className="py-3 px-4">
@@ -150,77 +149,76 @@ export default function FormView() {
       <dialog id="submission_modal" className="modal ">
         <div className="modal-box bg-[#002b5c] text-white max-w-2xl p-8 rounded-xl shadow-2xl">
           <h3 className="text-2xl font-bold mb-6 text-center">Submission Details</h3>
-      
+
 
           {selectedSubmission ? (
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex flex-col">
-                    <span className="font-semibold text-white/80">Submission ID:</span>
-                    <span>{selectedSubmission?.id || "N/A"}</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-semibold text-white/80">Submitted By:</span>
-                    <span>{selectedSubmission?.user?.user_profile?.name || "N/A"}</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-semibold text-white/80">Email:</span>
-                    <span>{selectedSubmission?.user?.email || "N/A"}</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-semibold text-white/80">Status:</span>
-                    <span
-                      className={`badge ${
-                        selectedSubmission?.status === "approved"
-                          ? "bg-green-500 text-white"
-                          : selectedSubmission?.status === "rejected"
-                          ? "bg-red-500 text-white"
-                          : "bg-yellow-500 text-white"
-                      } px-2 py-1 rounded-full`}
-                    >
-                      {selectedSubmission?.status || "pending"}
-                    </span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-semibold text-white/80">Submission Date:</span>
-                    <span>
-                      {selectedSubmission?.submission_date
-                        ? new Date(selectedSubmission.submission_date).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })
-                        : "N/A"}
-                    </span>
-                  </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col">
+                <span className="font-semibold text-white/80">Submission ID:</span>
+                <span>{selectedSubmission?.id || "N/A"}</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-semibold text-white/80">Submitted By:</span>
+                <span>{selectedSubmission?.user?.user_profile?.name || "N/A"}</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-semibold text-white/80">Email:</span>
+                <span>{selectedSubmission?.user?.email || "N/A"}</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-semibold text-white/80">Status:</span>
+                <span
+                  className={`badge ${selectedSubmission?.status === "approved"
+                      ? "bg-green-500 text-white"
+                      : selectedSubmission?.status === "rejected"
+                        ? "bg-red-500 text-white"
+                        : "bg-yellow-500 text-white"
+                    } px-2 py-1 rounded-full`}
+                >
+                  {selectedSubmission?.status || "pending"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-semibold text-white/80">Submission Date:</span>
+                <span>
+                  {selectedSubmission?.submission_date
+                    ? new Date(selectedSubmission.submission_date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                    : "N/A"}
+                </span>
+              </div>
 
-                  <div className="flex flex-col col-span-2">
-                    <span className="font-semibold text-white/80">Documents:</span>
-                    {selectedSubmission?.documents?.length > 0 ? (
-                      <ul className="list-disc pl-5 space-y-2">
-                        {selectedSubmission.documents.map((doc) => (
-                          <li key={doc.id} className="text-white/90">
-                            <span className="font-medium">{doc.document_type.toUpperCase()}:</span>{" "}
-                            <a
-                              href={`${baseURL}${doc.file}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-blue-400 hover:underline"
-                            >
-                              {getFileName(doc.file)}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <span className="text-white/80">No documents available.</span>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <p className="text-white/80 text-center text-lg">No submission data available.</p>
-             )}
+              <div className="flex flex-col col-span-2">
+                <span className="font-semibold text-white/80">Documents:</span>
+                {selectedSubmission?.documents?.length > 0 ? (
+                  <ul className="list-disc pl-5 space-y-2">
+                    {selectedSubmission.documents.map((doc) => (
+                      <li key={doc.id} className="text-white/90">
+                        <span className="font-medium">{doc.document_type.toUpperCase()}:</span>{" "}
+                        <a
+                          href={`${baseURL}${doc.file}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-400 hover:underline"
+                        >
+                          {getFileName(doc.file)}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <span className="text-white/80">No documents available.</span>
+                )}
+              </div>
+            </div>
+          ) : (
+            <p className="text-white/80 text-center text-lg">No submission data available.</p>
+          )}
 
           <div className="modal-action mt-6 w-full flex justify-end gap-4">
             <button

@@ -16,7 +16,7 @@ export default function Navbar() {
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin") === "true" ? true : false || false);
   const { data: loggedInUser, isLoading } = useGetLoggedUserQuery();
   console.log("loggedInUser", loggedInUser)
-  const baseURL = "https://ronvergara.duckdns.org"
+  const baseURL = "http://10.10.13.73:5000"
 
   const [updateProfile, { data, isLoading: isUpdating }] = useUpdateUserProfileMutation();
 
@@ -44,10 +44,10 @@ export default function Navbar() {
   }, [loggedInUser]);
 
   useEffect(() => {
-  if (loggedInUser?.image) {
-    console.log(`${baseURL}${loggedInUser.image}`);
-  }
-}, [loggedInUser]);
+    if (loggedInUser?.image) {
+      console.log(`${baseURL}${loggedInUser.image}`);
+    }
+  }, [loggedInUser]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -90,13 +90,13 @@ export default function Navbar() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     localStorage.removeItem("isAdmin");
-  
+
 
 
     setTimeout(() => {
       setIsLoggingOut(false);
       navigate("/login");
-        refetch()
+      refetch()
     }, 2000);
   };
 
@@ -112,7 +112,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-[#0B2A52] shadow-lg">
-      <Toaster/>
+      <Toaster />
       <div className="container mx-auto flex items-center justify-between py-3">
         {/* Logo */}
         <div className="z-10 flex items-center font-bold text-white">
@@ -147,27 +147,27 @@ export default function Navbar() {
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="avatar flex items-center">
                 <div className="w-[50px] h-[50px] rounded-full overflow-hidden">
-                 <img
-  src={
-    loggedInUser?.image
-      ? `${baseURL}/${loggedInUser.image}`
-      : "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
-  }
-  alt="User Avatar"
-  className="w-[50px] h-[50px] object-cover "
-/>
+                  <img
+                    src={
+                      loggedInUser?.image
+                        ? `${baseURL}/${loggedInUser.image}`
+                        : "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
+                    }
+                    alt="User Avatar"
+                    className="w-[50px] h-[50px] object-cover "
+                  />
 
 
                 </div>
                 <ChevronDown size={20} className="text-white ml-2" />
               </div>
               <ul className="menu dropdown-content z-[999] p-3 mt-1 shadow bg-[#002b5c] opacity-90 rounded-box w-48 space-y-2 border border-white/20">
-                
+
                 {isAdmin ? <Link to="/admin"
                   className="flex text-white items-center gap-3 py-2 px-3 text-base hover:bg-[#104685] rounded-md"
                 >
 
-                  <RiDashboardHorizontalLine  className="w-5 h-5" />Dashboard
+                  <RiDashboardHorizontalLine className="w-5 h-5" />Dashboard
                 </Link> : <li>
                   <Link to="/va-form"
                     className="flex text-white items-center gap-3 py-2 px-3 text-base hover:bg-[#104685] rounded-md"
@@ -269,16 +269,16 @@ export default function Navbar() {
                 /> */}
 
 
-<img
-  src={
-    loggedInUser?.image
-      ? `${baseURL}${loggedInUser?.image}`
-      
-      : "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
-  }
-  alt="User Avatar"
-  className="h-12 w-12 rounded-full object-cover"
-/>
+                <img
+                  src={
+                    loggedInUser?.image
+                      ? `${baseURL}${loggedInUser?.image}`
+
+                      : "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
+                  }
+                  alt="User Avatar"
+                  className="h-12 w-12 rounded-full object-cover"
+                />
 
 
 

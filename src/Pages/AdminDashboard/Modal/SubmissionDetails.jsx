@@ -9,7 +9,7 @@ export default function SubmissionsModal({ submissions, isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const baseApi = "https://ronvergara.duckdns.org"
+  const baseApi = "http://10.10.13.73:5000"
 
   return (
     <div
@@ -51,28 +51,27 @@ export default function SubmissionsModal({ submissions, isOpen, onClose }) {
                     <p className="font-medium text-gray-800">
                       {submission.submission_date
                         ? new Date(submission.submission_date).toLocaleDateString(
-                            "en-US",
-                            {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            }
-                          )
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          }
+                        )
                         : "N/A"}
                     </p>
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 mb-1">Status</p>
                     <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        submission.status === "pending"
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${submission.status === "pending"
                           ? "bg-yellow-100 text-yellow-800"
                           : submission.status === "completed"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-red-100 text-red-800"
-                      }`}
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
                     >
                       {submission.status || "N/A"}
                     </span>
@@ -80,13 +79,12 @@ export default function SubmissionsModal({ submissions, isOpen, onClose }) {
                   <div>
                     <p className="text-xs text-gray-500 mb-1">Fax Status</p>
                     <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        submission.fax_status === "pending"
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${submission.fax_status === "pending"
                           ? "bg-yellow-100 text-yellow-800"
                           : submission.fax_status === "completed"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-red-100 text-red-800"
-                      }`}
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
                     >
                       {submission.fax_status || "N/A"}
                     </span>
@@ -124,13 +122,13 @@ export default function SubmissionsModal({ submissions, isOpen, onClose }) {
                           </a> */}
 
                           <a
-  href={`${baseApi}${doc.file}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="text-blue-600 text-sm hover:underline"
->
-  View
-</a>
+                            href={`${baseApi}${doc.file}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 text-sm hover:underline"
+                          >
+                            View
+                          </a>
 
                         </div>
                       ))}

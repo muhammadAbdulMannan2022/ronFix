@@ -9,10 +9,11 @@ import Services from "./Services";
 import VeteransSlider from "./VeteransSlider";
 import Video from "./Video";
 import MessaageIcon from "../../assets/chat-icon.svg"
+import SupportChat from "../SupportChat/SupportChat";
 
 const Home = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const isLoggedIn = !!localStorage.getItem("access_token"); 
+  const isLoggedIn = !!localStorage.getItem("access_token");
 
   const toggleChat = () => {
     setIsChatOpen(!isChatOpen);
@@ -20,8 +21,8 @@ const Home = () => {
 
   return (
     <div className="relative">
-       <Banner/>
-       <Video />
+      <Banner />
+      <Video />
       <Services />
       <Pricing_Plan />
       <VeteransSlider />
@@ -37,12 +38,12 @@ const Home = () => {
             <img src={MessaageIcon} alt="Chat Support" className="w-[50px] h-[50px]" />
           </button>
 
-          {/* {isChatOpen && (
+          {isChatOpen && (
             <div className="fixed bottom-24 right-6 z-50 ">
               <SupportChat onClose={toggleChat} />
-              
+
             </div>
-          )} */}
+          )}
         </>
       )}
 

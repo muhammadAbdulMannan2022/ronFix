@@ -13,7 +13,7 @@ export default function Document() {
   const [isActionTaken, setIsActionTaken] = useState(false);
   const { data: allDocuments, isLoading } = useGetDocumentsQuery();
 
-  const baseURL = "https://ronvergara.duckdns.org";
+  const baseURL = "http://10.10.13.73:5000";
 
   console.log("documents", allDocuments);
 
@@ -58,7 +58,7 @@ export default function Document() {
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
           </div>
-   
+
         </div>
       </div>
 
@@ -95,10 +95,10 @@ export default function Document() {
                   <td className="py-3 px-4">
                     {doc?.created_at
                       ? new Date(doc.created_at).toLocaleString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })
                       : "N/A"}
                   </td>
                   <td className="py-3 px-4">
@@ -106,7 +106,7 @@ export default function Document() {
                       className=" dark:bg-white"
                       onClick={() => openModal(doc)}
                     >
-                     <FaRegEye className="h-5 w-5 text-[#0A3161] " />
+                      <FaRegEye className="h-5 w-5 text-[#0A3161] " />
                     </button>
                   </td>
                 </tr>
@@ -143,20 +143,20 @@ export default function Document() {
                 <span>{selectedDocument.document_type || "N/A"}</span>
               </div>
               <div className="flex flex-col col-span-2">
-  <span className="font-semibold text-white/80">Document:</span>
-  {selectedDocument?.file_url ? (
-    <a
-      href={`${baseURL}${selectedDocument.file_url}`}
-      target="_blank"
-      // rel="noopener noreferrer"
-      className="text-blue-400 hover:underline"
-    >
-      {getFileName(selectedDocument.file_url)}
-    </a>
-  ) : (
-    <span className="text-white/80">No document available.</span>
-  )}
-</div>
+                <span className="font-semibold text-white/80">Document:</span>
+                {selectedDocument?.file_url ? (
+                  <a
+                    href={`${baseURL}${selectedDocument.file_url}`}
+                    target="_blank"
+                    // rel="noopener noreferrer"
+                    className="text-blue-400 hover:underline"
+                  >
+                    {getFileName(selectedDocument.file_url)}
+                  </a>
+                ) : (
+                  <span className="text-white/80">No document available.</span>
+                )}
+              </div>
 
             </div>
             <div className="modal-action mt-6 w-full flex justify-end gap-4">
