@@ -270,8 +270,12 @@ import { useForm } from "react-hook-form";
 import { CheckCircle, Mail, Phone, User, MessageSquare, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useGetIntouchTodayMutation } from "../../redux/features/baseApi";
+import { toast, Toaster } from "sonner";
 
 export default function ContactForm() {
+
+	const [getIntouchToday] = useGetIntouchTodayMutation();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -291,15 +295,22 @@ export default function ContactForm() {
   });
 
   const onSubmit = async (data) => {
+	 console.log("Form Submitted:", data);
     setIsLoading(true);
+
+	const payload = {
+		first_name: data.first_name,
+		last_name: data.last_name,
+		email: data.email,
+		message: data.message,
+	};
     try {
-      console.log("Form Submitted:", data);
-      // Simulate async request
-      await new Promise((res) => setTimeout(res, 1500));
-      setIsSubmitted(true);
-      reset(); // reset form after success
+		const response = await getIntouchToday(payload).unwrap();
+		console.log(response, "bgresponse");
+		toast.success(response?.message || "Message sent successfully!");
+   		reset(); 
     } catch (err) {
-      console.error("Submission failed:", err);
+		toast.error(err?.data?.message || "Failed to send message. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -358,6 +369,8 @@ export default function ContactForm() {
         backgroundPosition: "center",
       }}
     >
+
+		<Toaster/>
       <div className="md:container mx-auto">
         <motion.div
           variants={formVariants}
@@ -373,13 +386,13 @@ export default function ContactForm() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 ">
           <motion.form
             variants={formVariants}
             initial="hidden"
             animate="visible"
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-5 bg-white md:p-6 p-3 py-10 md:py-0 rounded-none shadow-md w-full"
+            className="space-y-5 bg-white md:p-6 p-3 py-10 md:py-0 rounded-none shadow-md w-full rounded-tr-[50px] rounded-bl-[50px]"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:mt-8 mt-0 md:pt-16">
               <div>

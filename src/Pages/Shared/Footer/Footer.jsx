@@ -54,6 +54,13 @@ export default function Footer() {
 									CALCULATOR
 								</Link>
 							</li>
+
+							<li>
+								<a
+								 href="/#faqs" className="text-gray-300 hover:text-white text-sm transition-colors">
+									Faq 	
+								</a>
+							</li>
 							
 						</ul>
 					</div>

@@ -18,7 +18,7 @@ export default function Navbar() {
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin") === "true" ? true : false || false);
   const { data: loggedInUser, isLoading } = useGetLoggedUserQuery();
   console.log("loggedInUser", loggedInUser)
-  const baseURL = "http://10.10.13.73:5000"
+  const baseURL = "https://ronvergara.duckdns.org"
 
   const [updateProfile, { data, isLoading: isUpdating }] = useUpdateUserProfileMutation();
 
@@ -177,7 +177,7 @@ export default function Navbar() {
                     className="flex text-white items-center gap-3 py-2 px-3 text-base hover:bg-[#104685] rounded-md"
                   >
 
-                    <FaRegFilePdf className="w-5 h-5" /> VAForm
+                    <FaRegFilePdf className="w-5 h-5" /> VA-Form
                   </Link>
                 </li>}
 

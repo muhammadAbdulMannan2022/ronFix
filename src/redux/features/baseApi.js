@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
 	reducerPath: "baseApi",
 	baseQuery: fetchBaseQuery({
-		baseUrl: "http://10.10.13.73:5000/",
+		baseUrl: "https://ronvergara.duckdns.org/",
 		prepareHeaders: (headers, { endpoint }) => {
 			// List of auth-related endpoints that should not include the token
 			const authEndpoints = [
@@ -66,6 +66,13 @@ export const baseApi = createApi({
 				body: payload,
 			}),
 		}),
+		changePassword:builder.mutation({
+			query: (payload)=>({
+				url:"api/auth/password-reset/confirm/",
+				method:"POST",
+				body:payload
+			})
+		}),
 		getPlans: builder.query({
 			query: () => "api/payment/get_all/subscribtions-plan/",
 		}),
@@ -88,6 +95,13 @@ export const baseApi = createApi({
 				url: "api/va/narration/narration_genarate/",
 				method: "POST",
 				body: narratioData,
+			}),
+		}),
+		getIntouchToday: builder.mutation({
+			query: (payload) => ({
+				url: "api/va/email/get_in_touch_today/",
+				method: "POST",
+				body: payload,
 			}),
 		}),
 		startChat: builder.mutation({
@@ -180,8 +194,10 @@ export const {
 	useGetLoggedUserQuery,
 	useForgetPasswordMutation,
 	useOtpVerificationMutation,
+	useChangePasswordMutation,
 	useResetPasswordMutation,
 	useGetPlansQuery,
+	useGetIntouchTodayMutation,
 	useContactFormMutation,
 	usePaymentCheckoutMutation,
 	useGenerateNarrationMutation,

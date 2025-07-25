@@ -3,7 +3,7 @@ import { X, FileText } from "lucide-react";
 
 export default function DocumentsModal({ documents, isOpen, onClose }) {
 
-  const baseApi = "http://10.10.13.73:5000"
+  const baseApi = "https://ronvergara.duckdns.org"
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {

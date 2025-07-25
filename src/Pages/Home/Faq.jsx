@@ -125,11 +125,11 @@ export default function FAQ() {
       <div className="container mx-auto px-3 md:px-20 relative z-10">
         {/* Header */}
         <div className="mb-5">
-          <div className="flex items-end gap-4 mb-6">
-            <h2 className="text-3xl md:text-5xl font-bold text-white">
-              Frequently
-              <br />
-              Asked Questions
+          <div className="flex items-center gap-4 mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold text-white text-center md:text-start">
+              Frequently Asked Questions
+              {/* <br /> */}
+              
             </h2>
             <div className="hidden md:block ps-32">
               <svg width="600" height="20" viewBox="0 0 600 20" className="text-white">
