@@ -392,7 +392,7 @@ export default function ContactForm() {
             initial="hidden"
             animate="visible"
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-5 bg-white md:p-6 p-3 py-10 md:py-0 rounded-none shadow-md w-full rounded-tr-[50px] rounded-bl-[50px]"
+            className="space-y-5 bg-white md:p-6 p-3 py-10 md:py-0 rounded-none shadow-md w-full md:rounded-tr-[50px] md:rounded-bl-[50px]"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:mt-8 mt-0 md:pt-16">
               <div>

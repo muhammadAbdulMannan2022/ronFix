@@ -18,7 +18,7 @@ export default function Navbar() {
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin") === "true" ? true : false || false);
   const { data: loggedInUser, isLoading } = useGetLoggedUserQuery();
   console.log("loggedInUser", loggedInUser)
-  const baseURL = "https://ronvergara.duckdns.org"
+  const baseURL = "https://backend.valrpro.com"
 
   const [updateProfile, { data, isLoading: isUpdating }] = useUpdateUserProfileMutation();
 

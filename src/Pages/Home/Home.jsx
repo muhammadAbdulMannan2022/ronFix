@@ -20,7 +20,7 @@ const Home = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <Banner />
       <Video />
       <Services />

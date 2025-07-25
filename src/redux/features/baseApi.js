@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
 	reducerPath: "baseApi",
 	baseQuery: fetchBaseQuery({
-		baseUrl: "https://ronvergara.duckdns.org/",
+		baseUrl: "https://backend.valrpro.com/",
 		prepareHeaders: (headers, { endpoint }) => {
 			// List of auth-related endpoints that should not include the token
 			const authEndpoints = [

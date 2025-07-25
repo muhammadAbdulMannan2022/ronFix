@@ -43,7 +43,7 @@ function Final_Sub() {
     };
 
     try {
-      const response = await fetch(' https://ronvergara.duckdns.org/api/va/vaform/submit/', {
+      const response = await fetch(' https://backend.valrpro.com/api/va/vaform/submit/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -13,7 +13,7 @@ export default function Document() {
   const [isActionTaken, setIsActionTaken] = useState(false);
   const { data: allDocuments, isLoading } = useGetDocumentsQuery();
 
-  const baseURL = "https://ronvergara.duckdns.org";
+  const baseURL = "https://backend.valrpro.com";
 
   console.log("documents", allDocuments);
 

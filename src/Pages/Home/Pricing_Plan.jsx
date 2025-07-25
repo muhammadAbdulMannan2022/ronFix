@@ -71,7 +71,7 @@ const Pricing_Plan = () => {
   return (
     <section 
     id="pricing_plan"
-    className="md:p-5 bg-[#E0F7FF] dark:bg-[#F1F8FE] md:py-20 pt-6 md:pt-28 pb-10 md:pb-10 md:min-h-[75vh] flex items-center justify-center">
+    className="md:p-5 bg-[#E0F7FF] dark:bg-[#E0F7FF] md:py-20 pt-6 md:pt-28 pb-10 md:pb-10 md:min-h-[75vh] flex items-center justify-center">
       <ToastContainer />
 
       <input
@@ -216,7 +216,7 @@ const Pricing_Plan = () => {
       <div className="md:hidden bg-[#E0F7FF] dark:bg-[#E0F7FF] container p-2 mx-auto">
         <motion.div variants={mobileTextVariants} initial="hidden" animate="visible" className="text-center mb-8">
           <h1 className="text-2xl font-bold text-[#16437E]">Complete the Veterans Benefits form with a</h1>
-          <h1 className="bg-[#B31942] text-white w-full max-w-[350px] mx-auto flex items-center justify-center rounded-full p-3 text-2xl shadow-md shadow-gray-700 font-bold mt-5">
+          <h1 className="bg-[#B31942] text-white w-full max-w-[350px] mx-auto flex items-center justify-center rounded-full p-2 text-2xl shadow-md shadow-gray-700 font-bold mt-5">
             <span className="text-white font-bold text-2xl">Payment of $195 or $50</span>
           </h1>
         </motion.div>
