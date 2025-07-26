@@ -176,7 +176,7 @@ const Pricing_Plan = () => {
       </div>
 
       {/* Large Device View */}
-      <div className="hidden md:block bg-[#E0F7FF] dark:bg-[#F1F8FE] container p-2 mx-auto md:pb-10">
+      <div className="hidden md:block bg-[#E0F7FF] dark:bg-[#E0F7FF] container p-2 mx-auto md:pb-10">
         <div className="container  mx-auto text-start flex items-start justify-between mb-10 text-4xl font-bold">
           <div className="md:px-6 flex items-center justify-between basis-10/12">
             <div className="">

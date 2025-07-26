@@ -1,107 +1,6 @@
 
 
 
-// import FAQ from "../Home/Faq";
-
-// const AboutUs = () => {
-
-
-//   return (
-//     <section className="relative">
-
-//       <div
-//         className="hidden md:flex bg-cover bg-center bg-no-repeat min-h-screen items-center justify-between "
-//         style={{
-//           backgroundImage: "url('https://i.ibb.co/1GFVFjRz/Desktop-9.png')",
-//         }}
-//       >
-//         <div className="relative md:flex items-center justify-between mx-auto w-full py-24 pt-44">
-        
-//           <div className="relative z-10 w-auto max-w-[900px] ">
-        
-//               <div>
-//                 <div className="bg-white rounded-r-[30px] shadow-lg border border-gray-200 py-12 mt-10">
-//                   <div className="ms-0  py-10 px-4 md:px-0">
-//                     <h2 className="text-3xl md:ps-20 md:text-5xl font-bold text-[#003794] uppercase leading-tight">
-//                       Driving Quality Support, 
-//                       <br />
-//                       <span className="text-[#003794]   mt-4 inline-block md:text-5xl">and Veteran Satisfaction</span>
-//                     </h2>
-//                   </div>
-//                 </div>
-//                 <div className="ms-0  py-10 px-20">
-//                   <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-8">
-//                     We're committed to serving those who served our nation, providing resources and support that honor their sacrifice. Learn how our dedicated team is making a difference in veterans' lives every day.
-//                   </p>
-                  
-//                 </div>
-//               </div>
-         
-//           </div>
-
-          
-//           <div className="relative z-10 basis-6/12 flex items-center justify-center">
-//             <img
-//               src="https://i.ibb.co/ksPrFSQB/about-us.png"
-//               className=""
-//               alt="Banner Graphic"
-//             />
-//           </div>
-//         </div>
-
-
-//       </div>
-
-//       <div className="bg-[#E2F5FC] data-bg-[#E2F5FC]">
-
-//         <div className="flex items-center justify-between ">
-//           <div className="p-16 px-20 basis-7/12">
-//             <h1 className="text-5xl font-bold text-[#003794] pb-10">We are committed</h1>
-
-//            <div className="mb-10">
-//              <p className="text-[#25456F] font-normal">Our mission is to uphold the honor and dignity of those who have sacrificed for our nation by providing services that foster personal development, career advancement, and community integration. We are committed to creating a welcoming environment where veterans feel understood, valued, and empowered to achieve their full potential.</p>
-//            </div>
-
-//         <div className="space-y-3 text-[#25456F]">
-//               <p>Our team is comprised of dedicated professionals who believe in the power of community and service. We strive to build strong relationships with veterans, their families, and partner organizations to create a network of support that extends far beyond our doors.</p>
-
-//             <p>Through advocacy, education, and personalized assistance, we work tirelessly to ensure that every veteran has access to the resources and opportunities they deserve.</p>
-//         </div>
-
-//           </div>
-
-//           <div className="flex items-center justify-center mx-auto py-16" >
-//             <img src="https://i.ibb.co/0pQswDVf/about-us-info.png" alt=""  />
-//           </div>
-//         </div>
-
-//         <div className="flex items-center gap-20 py-10 px-20 pb-20">
-//           <div className="bg-[#D7EEFE] p-5 rounded-[20px] shadow-md">
-//             <h1 className="text-[#0070C0] text-5xl font-bold  pb-5">Our Mission</h1>
-//             <p className="text-[#25456F]">To honor veterans' service by providing comprehensive support that enhances their quality of life and eases their transition to civilian life.</p>
-//           </div>
-
-//            <div className="bg-[#C9EFF9] p-5 rounded-[20px] shadow-md">
-//             <h1 className="text-[#61CECB] text-5xl font-bold  pb-5">Our Vision</h1>
-//             <p className="text-[#25456F]">A nation where all veterans thrive with dignity, purpose, and the recognition they deserve for their service and sacrifice.</p>
-//           </div>
-//         </div>
-
-
-//         <div className="py-20 bg-white">
-//           <FAQ/>
-//         </div>
-       
-//       </div>
-      
-//     </section>
-//   );
-// };
-
-// export default AboutUs;
-
-
-
 import FAQ from "../Home/Faq";
 
 const AboutUs = () => {
@@ -213,7 +112,7 @@ const AboutUs = () => {
         </div>
 
         {/* FAQ Section */}
-        <div className="py-10 md:py-20 bg-white">
+        <div className="md:pb-20">
           <FAQ />
         </div>
       </div>
