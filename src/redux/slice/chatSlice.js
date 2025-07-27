@@ -1,9 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Function to get the initial chat ID from localStorage
+const getInitialChatId = () => {
+	try {
+		const savedChatId = localStorage.getItem("currentChatId");
+		return savedChatId ? JSON.parse(savedChatId) : null;
+	} catch (error) {
+		console.error("Could not parse chat ID from localStorage", error);
+		return null;
+	}
+};
+
 const chatSlice = createSlice({
 	name: "chatSlice",
 	initialState: {
-		currentChatId: null,
+		// Initialize currentChatId from localStorage
+		currentChatId: getInitialChatId(),
 		messages: [],
 		activeChats: [],
 		showNewChatForm: false,
@@ -11,7 +23,15 @@ const chatSlice = createSlice({
 	},
 	reducers: {
 		setCurrentChatId(state, action) {
-			state.currentChatId = action.payload;
+			const chatId = action.payload;
+			state.currentChatId = chatId;
+			// Persist the chatId to localStorage
+			if (chatId) {
+				localStorage.setItem("currentChatId", JSON.stringify(chatId));
+			} else {
+				// Remove it if the chatId is null (chat ended)
+				localStorage.removeItem("currentChatId");
+			}
 		},
 		setMessages(state, action) {
 			state.messages = action.payload;
@@ -29,6 +49,8 @@ const chatSlice = createSlice({
 			state.chatSubject = action.payload;
 		},
 		clearChatState(state) {
+			// Clear the state and also remove the ID from localStorage
+			localStorage.removeItem("currentChatId");
 			state.currentChatId = null;
 			state.messages = [];
 			state.showNewChatForm = false;

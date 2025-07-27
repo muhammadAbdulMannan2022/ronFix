@@ -56,7 +56,7 @@ export default function Dashboard() {
 					icon: <LuStickyNote size={20} />,
 					path: "/admin/document",
 				},
-				
+
 				{
 					name: "LiveChat",
 					icon: <MessageSquareMore size={20} />,
@@ -104,19 +104,17 @@ export default function Dashboard() {
 	return (
 		<div className="flex h-screen bg-gray-50">
 			<aside
-				className={`${
-					isCollapsed ? "w-20" : "w-76"
-				} bg-[#0A3161] border-r border-gray-200 transition-all duration-500 ease-in-out`}
+				className={`${isCollapsed ? "w-20" : "w-76"
+					} bg-[#0A3161] border-r border-gray-200 transition-all duration-500 ease-in-out`}
 			>
 				<div className="h-16 pt-20 flex items-center justify-center px-4 ">
 					<div className="flex items-center justify-center gap-2">
 						<Link
 							to="/"
-							className={`transform transition-all duration-500 ${
-								isCollapsed
-									? "opacity-0 -translate-x-full"
-									: "opacity-100 translate-x-0"
-							}`}
+							className={`transform transition-all duration-500 ${isCollapsed
+								? "opacity-0 -translate-x-full"
+								: "opacity-100 translate-x-0"
+								}`}
 						>
 							<img
 								src="https://i.ibb.co.com/RZzJHnG/Group-2147225243.png"
@@ -137,34 +135,30 @@ export default function Dashboard() {
 											<div className="dropdown">
 												<div tabIndex={0} role="button">
 													<div
-														className={`flex items-center w-[260px] gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 group relative transition-all duration-300 ${
-															selectedItem ===
+														className={`flex items-center w-[260px] gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 group relative transition-all duration-300 ${selectedItem ===
 															item.name
-																? "bg-gray-200 font-semibold"
-																: ""
-														}`}
+															? "bg-gray-200 font-semibold"
+															: ""
+															}`}
 													>
 														<span
-															className={`group-hover:text-gray-700 transition-colors duration-300 ${
-																selectedItem ===
+															className={`group-hover:text-gray-700 transition-colors duration-300 ${selectedItem ===
 																item.name
-																	? "text-[#0A3161]"
-																	: "text-white"
-															}`}
+																? "text-[#0A3161]"
+																: "text-white"
+																}`}
 														>
 															{item.icon}
 														</span>
 														<span
-															className={`transform transition-all duration-500 ${
-																isCollapsed
-																	? "opacity-0 -translate-x-full"
-																	: "opacity-100 translate-x-0"
-															} whitespace-nowrap group-hover:text-gray-700 ${
-																selectedItem ===
-																item.name
+															className={`transform transition-all duration-500 ${isCollapsed
+																? "opacity-0 -translate-x-full"
+																: "opacity-100 translate-x-0"
+																} whitespace-nowrap group-hover:text-gray-700 ${selectedItem ===
+																	item.name
 																	? "text-[#0A3161]"
 																	: "text-white"
-															}`}
+																}`}
 														>
 															{item.name}
 														</span>
@@ -195,12 +189,11 @@ export default function Dashboard() {
 																				child.path
 																			)
 																		}
-																		className={`flex items-center gap-2 px-3 py-2 my-1 transition-all duration-300 ${
-																			location.pathname ===
+																		className={`flex items-center gap-2 px-3 py-2 my-1 transition-all duration-300 ${location.pathname ===
 																			child.path
-																				? "bg-gray-200 text-[#0A3161] font-semibold"
-																				: "text-gray-700 hover:bg-gray-100"
-																		}`}
+																			? "bg-gray-200 text-[#0A3161] font-semibold"
+																			: "text-gray-700 hover:bg-gray-100"
+																			}`}
 																	>
 																		{
 																			child.icon
@@ -224,33 +217,29 @@ export default function Dashboard() {
 														item.path
 													)
 												}
-												className={`flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 group relative transition-all duration-300 ${
-													selectedItem === item.name
-														? "bg-gray-200 font-semibold"
-														: ""
-												}`}
+												className={`flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 group relative transition-all duration-300 ${selectedItem === item.name
+													? "bg-gray-200 font-semibold"
+													: ""
+													}`}
 											>
 												<span
-													className={`group-hover:text-gray-700 transition-colors duration-300 ${
-														selectedItem ===
+													className={`group-hover:text-gray-700 transition-colors duration-300 ${selectedItem ===
 														item.name
-															? "text-[#0A3161]"
-															: "text-white"
-													}`}
+														? "text-[#0A3161]"
+														: "text-white"
+														}`}
 												>
 													{item.icon}
 												</span>
 												<span
-													className={`transform transition-all duration-500 ${
-														isCollapsed
-															? "opacity-0 -translate-x-full"
-															: "opacity-100 translate-x-0"
-													} whitespace-nowrap group-hover:text-gray-700 ${
-														selectedItem ===
-														item.name
+													className={`transform transition-all duration-500 ${isCollapsed
+														? "opacity-0 -translate-x-full"
+														: "opacity-100 translate-x-0"
+														} whitespace-nowrap group-hover:text-gray-700 ${selectedItem ===
+															item.name
 															? "text-[#0A3161]"
 															: "text-white"
-													}`}
+														}`}
 												>
 													{item.name}
 												</span>
@@ -279,34 +268,34 @@ export default function Dashboard() {
 								)}
 							</button>
 							<div className="flex flex-col">
-								<span className="text-gray-700 font-bold text-xl">
+								<span className="text-gray-700 font-bold text-sm md:text-xl">
 									{selectedItem}
 								</span>
-								<h1 >
-									<span className="dark:text-gray-900">
+								<h1 className="md:flex items-center gap-2">
+									<span className="dark:text-gray-900 text-sm md:text-lg">
 										Hi, Welcome{" "}
-										</span>
-									<span className="text-[#B28D28] font-bold">
+									</span>
+									<span className="text-[#B28D28] font-bold hidden md:block">
 										{loggedUser?.name}
 									</span>
 								</h1>
 							</div>
 						</div>
-						<div className="flex items-center gap-4 me-10 dark:text-gray-900">
+						<div className="flex items-center gap-4 md:me-10 dark:text-gray-900">
 							<div className="flex items-center justify-center gap-2 dark:text-gray-900">
 								<div className="w-12">
 									<img
-  src={
-    loggedUser?.image
-      ? `${baseURL}${loggedUser.image}`
-      : "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
-  }
-  className="rounded-full w-[50px] h-[50px] object-cover"
-  alt="Admin Avatar"
-/>
+										src={
+											loggedUser?.image
+												? `${baseURL}${loggedUser.image}`
+												: "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
+										}
+										className="rounded-full w-[50px] h-[50px] object-cover"
+										alt="Admin Avatar"
+									/>
 
 								</div>
-								<div>
+								<div className="hidden md:block">
 									<h2 className="font-bold text-[14px] dark:text-gray-900">
 										{loggedUser?.name}
 									</h2>
@@ -345,7 +334,7 @@ export default function Dashboard() {
 					</div>
 				</header>
 
-				<main className="flex-1 overflow-auto p-12">
+				<main className="flex-1 overflow-auto py-12 md:px-12 px-3">
 					<Outlet />
 				</main>
 			</div>

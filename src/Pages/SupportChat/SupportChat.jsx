@@ -6,7 +6,7 @@ import {
     useGetMessagesQuery,
     useSendMessageMutation,
     useStartChatMutation,
-    useCloseChatMutation, // Assumed to be in your API slice
+    useCloseChatMutation,
 } from "../../redux/features/baseApi";
 import { setCurrentChatId } from "../../redux/slice/chatSlice";
 import { HiOutlineChatAlt2 } from "react-icons/hi";
@@ -19,47 +19,48 @@ export default function SupportChat() {
     const [messages, setMessages] = useState([]);
     const displayedMessageIds = useRef(new Set());
     const dispatch = useDispatch();
-
     const messagesEndRef = useRef(null);
 
     const [startChat, { isLoading: isStartingChat }] = useStartChatMutation();
     const [sendMessage] = useSendMessageMutation();
     const [closeChat, { isLoading: isClosingChat }] = useCloseChatMutation();
-    const { data: loggedUserData } = useGetLoggedUserQuery();
-    const currentUserId = loggedUserData?.id;
+
+    // We still need the user query, but it's no longer part of the message display logic
+    useGetLoggedUserQuery();
     const currentChatId = useSelector((state) => state.chatSlice.currentChatId);
 
     const {
         data: fetchedMessages,
-        isLoading,
+        isLoading, // Using the original 'isLoading' is now sufficient
         error,
     } = useGetMessagesQuery(currentChatId, {
         skip: !currentChatId,
     });
 
-    // EFFECT 1: Loads INITIAL historical messages from the API
+    // --- CORRECTED EFFECT 1: Loads historical messages ---
+    // Now only depends on fetchedMessages
     useEffect(() => {
-        if (fetchedMessages?.messages && currentUserId) {
+        if (fetchedMessages?.messages) {
             const formattedMessages = fetchedMessages.messages.map(
                 (message) => ({
                     id: message.firebase_message_id,
                     content: message.content,
                     timestamp: new Date(message.timestamp),
-                    isSent: message.sender.id === currentUserId,
+                    // THE FIX: Use sender.senderType directly
+                    isSent: message.sender.senderType === 'user',
                 })
             );
             setMessages(formattedMessages);
             displayedMessageIds.current.clear();
             formattedMessages.forEach(msg => displayedMessageIds.current.add(msg.id));
         }
-    }, [fetchedMessages, currentUserId]);
+    }, [fetchedMessages]); // Dependency on loggedUserData is removed
 
 
-    // EFFECT 2: The REAL-TIME listener
+    // --- CORRECTED EFFECT 2: The REAL-TIME listener ---
     useEffect(() => {
-        if (currentChatId && currentUserId) {
+        if (currentChatId) {
             const messagesRef = ref(db, `support_chats/${currentChatId}/messages`);
-
             const unsubscribe = onChildAdded(messagesRef, (snapshot) => {
                 const messageData = snapshot.val();
                 const messageId = snapshot.key;
@@ -67,16 +68,14 @@ export default function SupportChat() {
                 if (messageData && !displayedMessageIds.current.has(messageId)) {
                     displayedMessageIds.current.add(messageId);
 
-                    const isMessageSentByUser = messageData.senderType !== "admin";
-
                     const newMessage = {
                         id: messageId,
                         content: messageData.content,
                         timestamp: new Date(messageData.timestamp),
-                        isSent: isMessageSentByUser,
+                        // THE FIX: Use senderType from Firebase data directly
+                        isSent: messageData.senderType === 'user',
                     };
 
-                    // Filter out any optimistic message with a temporary ID before adding the real one
                     setMessages((prevMessages) => [...prevMessages.filter(m => !m.optimistic), newMessage]);
                 }
             });
@@ -85,15 +84,16 @@ export default function SupportChat() {
                 off(messagesRef, 'child_added', unsubscribe);
             };
         }
-    }, [currentChatId, currentUserId]);
+    }, [currentChatId]); // Dependency on currentUserId is removed
 
 
-    // EFFECT 3: Handles scrolling to the bottom
+    // EFFECT 3: Handles scrolling to the bottom (No change needed)
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
 
+    // --- NO CHANGES NEEDED IN HANDLERS ---
     const handleStartChat = async () => {
         if (!subject.trim()) return;
         try {
@@ -108,54 +108,32 @@ export default function SupportChat() {
         }
     };
 
-    // New handler for completing the chat
     const handleCompleteChat = async () => {
         if (!currentChatId) return;
         try {
-            // Call the close chat API endpoint
             await closeChat({ chatId: currentChatId }).unwrap();
-            // Reset the chat state in Redux
             dispatch(setCurrentChatId(null));
-            setMessages([]); // Clear messages from the UI
+            setMessages([]);
             displayedMessageIds.current.clear();
         } catch (error) {
             console.error("Error closing chat:", error);
-            // Optionally, show an error to the user
         }
     };
-
 
     const handleSendMessage = async (e) => {
         e.preventDefault();
         if (!newMessage.trim() || !currentChatId) return;
-
         const messageToSend = newMessage;
-        const tempId = `optimistic-${Date.now()}`; // Unique temporary ID for the key
-
-        // Optimistic UI Update
+        const tempId = `optimistic-${Date.now()}`;
         const optimisticMessage = {
-            id: tempId, // Use the temporary ID
-            content: messageToSend,
-            timestamp: new Date(),
-            isSent: true,
-            optimistic: true, // A flag to identify optimistic messages
+            id: tempId, content: messageToSend, timestamp: new Date(), isSent: true, optimistic: true,
         };
-
         setMessages(prevMessages => [...prevMessages, optimisticMessage]);
         setNewMessage("");
-
         try {
-            // Send the message to the server ("Fire and forget")
-            await sendMessage({
-                chatId: currentChatId,
-                message: messageToSend,
-            }).unwrap();
-
-            // The Firebase listener will handle receiving and displaying the confirmed message.
-
+            await sendMessage({ chatId: currentChatId, message: messageToSend }).unwrap();
         } catch (error) {
             console.error("Error sending message:", error);
-            // If the API call fails, remove the optimistic message and restore the input field
             setMessages(prevMessages => prevMessages.filter(m => m.id !== tempId));
             setNewMessage(messageToSend);
         }
@@ -163,13 +141,10 @@ export default function SupportChat() {
 
     const formatTime = (date) => {
         if (!date || isNaN(new Date(date))) return "";
-        return new Date(date).toLocaleTimeString("en-US", {
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true,
-        });
+        return new Date(date).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
     }
 
+    // --- NO CHANGES NEEDED IN JSX ---
     return (
         <div className="flex flex-col h-[60vh]  w-[400px] mx-auto bg-base-100 shadow-2xl rounded-xl overflow-hidden">
             <div className="navbar bg-gradient-to-r from-[#0B2A52]/90 to-[#0B2A52] text-base-100 shadow-md px-4">
@@ -181,7 +156,6 @@ export default function SupportChat() {
                             <p className="text-sm text-success">Online</p>
                         </div>
                     </div>
-                    {/* Updated button to call handleCompleteChat */}
                     {currentChatId && (
                         <button onClick={handleCompleteChat} disabled={isClosingChat} className="bg-green-500 px-2 py-1 rounded-full font-semibold hover:cursor-pointer disabled:bg-gray-500">
                             {isClosingChat ? "Closing..." : "Complete"}
