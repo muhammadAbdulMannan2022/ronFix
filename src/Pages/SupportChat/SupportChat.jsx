@@ -146,7 +146,7 @@ export default function SupportChat() {
 
     // --- NO CHANGES NEEDED IN JSX ---
     return (
-        <div className="flex flex-col h-[60vh]  w-[400px] mx-auto bg-base-100 shadow-2xl rounded-xl overflow-hidden">
+        <div className="flex flex-col h-[60vh]  md:w-[400px] w-[350px] mx-auto bg-base-100 shadow-2xl rounded-xl overflow-hidden">
             <div className="navbar bg-gradient-to-r from-[#0B2A52]/90 to-[#0B2A52] text-base-100 shadow-md px-4">
                 <div className="flex-1 flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -164,7 +164,7 @@ export default function SupportChat() {
                 </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 bg-base-200 dark:bg-white space-y-4 scroll-smooth">
+            <div className="flex-1 overflow-y-auto p-4 bg-base-200 bg-gray-300 border border-black/50 dark:bg-gray-300 space-y-4 scroll-smooth">
                 {isLoading ? (<div className="flex justify-center items-center h-full"><span>Loading...</span></div>
                 ) : error ? (<div className="flex justify-center items-center h-full text-red-600"><span>Error loading messages. Please try again.</span></div>
                 ) : !currentChatId ? (
@@ -172,8 +172,8 @@ export default function SupportChat() {
                         <div className="text-6xl mb-3 animate-bounce dark:text-black"><HiOutlineChatAlt2 /></div>
                         <p className="text-center text-lg dark:text-gray-900 font-medium">Start the conversation!</p>
                         <div className="w-full h-auto flex flex-col items-center justify-center py-10 gap-4">
-                            <input type="text" placeholder="Chat Subject" value={subject} onChange={(e) => setSubject(e.target.value)} className="py-3 w-full input input-bordered flex-1 rounded-md focus-white transition-all" />
-                            <button onClick={handleStartChat} disabled={isStartingChat || !subject.trim()} className={`w-full rounded-md flex items-center justify-center btn bg-[#0b2a52] text-white cursor-pointer`}>Start</button>
+                            <input type="text" placeholder="Chat Subject" value={subject} onChange={(e) => setSubject(e.target.value)} className="py-3 uppercase w-full input input-bordered flex-1 rounded-md focus-white transition-all" />
+                            <button onClick={handleStartChat} disabled={isStartingChat || !subject.trim()} className={`w-full uppercase rounded-md flex items-center justify-center btn bg-[#0b2a52] text-white cursor-pointer`}>Start</button>
                         </div>
                     </div>
                 ) : (

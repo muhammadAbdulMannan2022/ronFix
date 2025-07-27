@@ -1,115 +1,123 @@
 
-import { Shield, Award, Heart, CheckCircle } from "lucide-react"
+
+
+import FAQ from "../Home/Faq";
 
 const AboutUs = () => {
   return (
-    <section className="pt-20 md:pt-0">
+    <section className="relative">
       {/* Hero Section */}
-      <div className="relative w-full  bg-gradient-to-br from-[#0B2A52] via-[#0d3461] to-[#0f3e70]">
-        <div className="relative z-10 flex items-center py-20 md:py-32 px-4 sm:px-6 md:px-12">
-          <div className="container mx-auto">
-            <h1 className="text-3xl md:text-6xl font-bold text-white text-center md:text-start max-w-4xl leading-tight">
-              Dedicated to Simplifying the VALR Process for Veterans
-            </h1>
-            <p className="text-blue-100 text-base md:text-lg mt-6 md:mt-8 leading-relaxed max-w-3xl text-center md:text-start">
-              At VALR, we bridge the gap between veterans and the benefits they've earned. Our mission is to simplify
-              the complex Veterans Affairs process with expert guidance, personalized support, and unwavering advocacy
-              for every veteran we serve.
-            </p>
-            <div className="mt-8 md:mt-10 text-center md:text-start">
-              <button className="bg-white  text-[#0B2A52] hover:bg-gray-100 px-8 py-3 text-lg font-semibold rounded-lg transition-colors duration-200">
-                Get Started Today
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Mission Statement */}
-      <div className="px-4 sm:px-6 lg:px-12 py-16 md:py-20 bg-white dark:bg-white  transition-colors">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-black mb-6 ">Our Mission</h2>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-black leading-relaxed">
-            VALR exists to bridge the gap between veterans and the benefits they've earned through their service. We
-            understand that navigating the Veterans Affairs system can be complex and overwhelming. Our mission is to
-            simplify this process, providing clear guidance, expert support, and unwavering advocacy for every veteran
-            we serve.
-          </p>
-        </div>
-      </div>
-
-      {/* Our Values */}
-      <div className="px-4 sm:px-6 lg:px-12 py-16 md:py-20 bg-gray-50 dark:bg-white transition-colors">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-black mb-4">Our Core Values</h2>
-            <p className="text-lg text-gray-600 dark:text-black max-w-2xl mx-auto">
-              These principles guide everything we do and shape how we serve our veteran community.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Shield,
-                title: "Integrity",
-                description:
-                  "We operate with complete transparency and honesty, ensuring veterans receive accurate information and ethical guidance.",
-                color: "text-[#0B2A52] dark:text-blue-400",
-              },
-              {
-                icon: Heart,
-                title: "Compassion",
-                description:
-                  "We understand the unique challenges veterans face and approach every interaction with empathy and respect.",
-                color: "text-[#0B2A52] dark:text-blue-400",
-              },
-              {
-                icon: Award,
-                title: "Excellence",
-                description:
-                  "We strive for the highest standards in everything we do, from our services to our customer support.",
-                color: "text-[#0B2A52] dark:text-blue-400",
-              },
-            ].map((value, index) => (
-              <div
-                key={index}
-                className="text-center p-6 rounded-lg shadow-lg bg-white dark:bg-[#0f3e70] transition-colors border border-gray-200 dark:border-gray-600"
-              >
-                <div className="pt-6">
-                  <value.icon className={`w-12 h-12 ${value.color} mx-auto mb-4`} />
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{value.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300">{value.description}</p>
+      <div
+        className="hidden md:flex bg-cover bg-center bg-no-repeat min-h-screen items-center justify-between"
+        style={{
+          backgroundImage: "url('https://i.ibb.co/1GFVFjRz/Desktop-9.png')",
+        }}
+      >
+        <div className="relative md:flex items-center justify-between mx-auto w-full py-24 pt-44">
+          <div className="relative z-10 w-auto max-w-[900px]">
+            <div>
+              <div className="bg-white rounded-r-[30px] shadow-lg border border-gray-200 py-12 mt-10">
+                <div className="ms-0 py-10 px-4 md:px-0">
+                  <h2 className="text-3xl md:ps-20 md:text-5xl font-bold text-[#003794] uppercase leading-tight">
+                    Driving Quality Support,
+                    <br />
+                    <span className="text-[#003794] mt-4 inline-block md:text-5xl">and Veteran Satisfaction</span>
+                  </h2>
                 </div>
               </div>
-            ))}
+              <div className="ms-0 py-10 px-4 md:px-20">
+                <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-8">
+                  We're committed to serving those who served our nation, providing resources and support that honor their sacrifice. Learn how our dedicated team is making a difference in veterans' lives every day.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="relative z-10 basis-6/12 flex items-center justify-center">
+            <img
+              src="https://i.ibb.co/ksPrFSQB/about-us.png"
+              className=""
+              alt="Banner Graphic"
+            />
           </div>
         </div>
       </div>
 
-
-
-
-      {/* Call to Action */}
-      <div className="px-4 sm:px-6 lg:px-12 py-16 md:py-20 bg-white dark:bg-white transition-colors">
-        <div className="container mx-auto text-center max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-black mb-6">Ready to Get Started?</h2>
-          <p className="text-lg text-gray-600 dark:text-black mb-8 leading-relaxed">
-            Don't navigate the VALR process alone. Our experienced team is here to guide you every step of the way.
-            Contact us today and take the first step toward securing the benefits you've earned.
+      {/* Mobile Hero Section */}
+      <div className="md:hidden bg-[#E2F5FC] pt-32">
+        <div className="text-center pb-10 ">
+          <h2 className="text-2xl font-bold text-[#003794] uppercase leading-tight px-3">
+            Driving Quality Support,
+            <br />
+            <span className="text-[#003794] mt-2 inline-block">and Veteran Satisfaction</span>
+          </h2>
+          <p className="text-gray-700 text-sm leading-relaxed mt-4 mb-6 px-1">
+            We're committed to serving those who served our nation, providing resources and support that honor their sacrifice. Learn how our dedicated team is making a difference in veterans' lives every day.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-[#0B2A52] hover:bg-[#0d3461] text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200">
-              Schedule Free Consultation
-            </button>
-            <button className="px-8 py-3 rounded-lg border-2 border-[#0B2A52] text-[#0B2A52] hover:bg-[#0B2A52] hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-gray-900 bg-transparent transition-colors duration-200">
-              Learn More About Our Services
-            </button>
+          <img
+            src="https://i.ibb.co/ksPrFSQB/about-us.png"
+            className="px-5"
+            alt="Banner Graphic"
+          />
+        </div>
+      </div>
+
+      {/* Commitment Section */}
+      <div className="bg-[#E2F5FC]">
+        <div className="flex flex-col md:flex-row items-center justify-between">
+          <div className="p-4 md:p-16 md:px-20 md:basis-7/12">
+            <h1 className="text-3xl md:text-5xl font-bold text-[#003794] pb-6 md:pb-10 text-center md:text-start">
+              We are committed
+            </h1>
+            <div className="mb-6 md:mb-10">
+              <p className="text-[#25456F] text-sm md:text-base font-normal text-center md:text-start">
+                Our mission is to uphold the honor and dignity of those who have sacrificed for our nation by providing services that foster personal development, career advancement, and community integration. We are committed to creating a welcoming environment where veterans feel understood, valued, and empowered to achieve their full potential.
+              </p>
+            </div>
+            <div className="space-y-3 text-[#25456F] text-sm md:text-base text-center md:text-start">
+              <p>
+                Our team is comprised of dedicated professionals who believe in the power of community and service. We strive to build strong relationships with veterans, their families, and partner organizations to create a network of support that extends far beyond our doors.
+              </p>
+              <p>
+                Through advocacy, education, and personalized assistance, we work tirelessly to ensure that every veteran has access to the resources and opportunities they deserve.
+              </p>
+            </div>
           </div>
+          <div className="flex items-center justify-center mx-auto py-8 md:py-16">
+            <img
+              src="https://i.ibb.co/0pQswDVf/about-us-info.png"
+              className="w-full max-w-[300px] md:max-w-[500px]"
+              alt="About Us Info"
+            />
+          </div>
+        </div>
+
+        {/* Mission and Vision Section */}
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-20 py-10 px-4 md:px-20  pb-14">
+          <div className="bg-[#D7EEFE] p-5 rounded-[20px] shadow-md w-full md:w-auto text-center md:text-start">
+            <h1 className="text-[#0070C0] text-3xl md:text-5xl font-bold pb-5 ">
+              Our Mission
+            </h1>
+            <p className="text-[#25456F] text-sm md:text-base">
+              To honor veterans' service by providing comprehensive support that enhances their quality of life and eases their transition to civilian life.
+            </p>
+          </div>
+          <div className="bg-[#C9EFF9] p-5 rounded-[20px] shadow-md w-full md:w-auto text-center md:text-start">
+            <h1 className="text-[#61CECB] text-3xl md:text-5xl font-bold pb-5">
+              Our Vision
+            </h1>
+            <p className="text-[#25456F] text-sm md:text-base">
+              A nation where all veterans thrive with dignity, purpose, and the recognition they deserve for their service and sacrifice.
+            </p>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="md:pb-20">
+          <FAQ />
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default AboutUs
+export default AboutUs;

@@ -49,11 +49,11 @@ const Forgot_Password = () => {
           <button
             type="submit"
             disabled={emailSent}
-            className={`w-full bg-[#B31942] py-2 mt-4 rounded-md text-white font-semibold hover:opacity-90 ${
+            className={`w-full bg-[#B31942] py-2 mt-4 uppercase rounded-md text-white font-semibold hover:opacity-90 ${
               emailSent ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            {emailSent ? "Sending..." : "Send"}
+            {emailSent ? <span className="loading loading-bars loading-sm"></span> : "Send"}
           </button>
         </form>
         <p className="mt-4 text-base text-end text-gray-300">

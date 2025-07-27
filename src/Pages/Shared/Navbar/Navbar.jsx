@@ -4,6 +4,8 @@ import logo from "../../../assets/VALR_logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useGetLoggedUserQuery, useUpdateUserProfileMutation } from "../../../redux/features/baseApi";
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaRegFilePdf } from "react-icons/fa6";
+
 import { toast, Toaster } from "sonner";
 import { RiDashboardHorizontalLine } from "react-icons/ri";
 import Profile from "../../AdminDashboard/Profile";
@@ -16,7 +18,7 @@ export default function Navbar() {
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin") === "true" ? true : false || false);
   const { data: loggedInUser, isLoading } = useGetLoggedUserQuery();
   console.log("loggedInUser", loggedInUser)
-  const baseURL = "http://10.10.13.73:5000"
+  const baseURL = "https://backend.valrpro.com"
 
   const [updateProfile, { data, isLoading: isUpdating }] = useUpdateUserProfileMutation();
 
@@ -70,6 +72,7 @@ export default function Navbar() {
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about_us" },
     { name: "Calculator", path: "/calculator" },
+    
   ];
 
   useEffect(() => {
@@ -111,9 +114,9 @@ export default function Navbar() {
 
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-[#0B2A52] shadow-lg">
-      <Toaster />
-      <div className="container mx-auto flex items-center justify-between py-3">
+    <nav className="fixed top-0 z-50 w-full bg-[#0B2A52] shadow-lg md:px-20">
+      <Toaster/>
+      <div className="md:container mx-auto flex items-center justify-between py-3 ps-3 md:ps-0">
         {/* Logo */}
         <div className="z-10 flex items-center font-bold text-white">
           <img
@@ -121,7 +124,7 @@ export default function Navbar() {
             alt="VALR Logo"
             width={72}
             height={52}
-            className="h-[75px] w-[90px] pl-5 transition-all duration-300 sm:h-[80px] sm:w-[80px] md:h-[70px] md:w-[80px] md:pl-0"
+            className="h-[60px] w-[60px]  transition-all duration-300 sm:h-[80px] sm:w-[80px] md:h-[70px] md:w-[80px]"
           />
         </div>
 
@@ -130,6 +133,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <Link
               key={link.path}
+              href={link.path}
               to={link.path}
               className={`relative text-white uppercase tracking-wide hover:text-opacity-90 transition-all after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-full after:bg-white after:transition-transform after:duration-300 ${location.pathname === link.path
                 ? "after:scale-x-100 font-semibold"
@@ -173,7 +177,7 @@ export default function Navbar() {
                     className="flex text-white items-center gap-3 py-2 px-3 text-base hover:bg-[#104685] rounded-md"
                   >
 
-                    <FaUser className="w-5 h-5" /> VAForm
+                    <FaRegFilePdf className="w-5 h-5" /> VA-Form
                   </Link>
                 </li>}
 
@@ -243,6 +247,7 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
+                  href={link.path}
                   to={link.path}
                   className={`px-6 py-4 text-white transition duration-200 relative ${location.pathname === link.path
                     ? "bg-white/10 font-semibold after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-white"

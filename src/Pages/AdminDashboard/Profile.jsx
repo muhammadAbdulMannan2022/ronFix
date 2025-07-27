@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { CiEdit } from "react-icons/ci";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -17,7 +17,7 @@ const Profile = () => {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const baseURL = "http://10.10.13.73:5000";
+  const baseURL = "https://backend.valrpro.com";
   const { data: loggedUser, isLoading: isUserLoading, error, refetch } = useGetLoggedUserQuery();
   const [updateProfile, { isLoading: isUpdating }] = useUpdateUserProfileMutation();
 

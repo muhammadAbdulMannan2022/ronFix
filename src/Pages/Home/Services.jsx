@@ -5,7 +5,6 @@ import { RiBarChart2Fill } from "react-icons/ri";
 import { motion } from "framer-motion";
 
 export default function Services() {
-  // Animation variants for mobile view
   const mobileCardVariants = {
     hidden: { opacity: 0, x: -50 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
@@ -15,16 +14,16 @@ export default function Services() {
     <div className="bg-[#E0F7FF] dark:bg-[#E0F7FF]">
       {/* Large Device View (Unchanged) */}
       <div className="hidden md:block">
-        <div className="text-center container mx-auto px-2 md:pt-10  p-10">
-          <h1 className="md:text-4xl text-start font-bold text-[#0B2A52] pb-6">Services</h1>
-          <p className="text-gray-500 font-medium text-start w-1/2">
+        <div className="text-center container mx-auto px-2 md:pt-10  p-10 md:px-20 md:pb-8">
+          <h1 className="md:text-4xl text-start font-bold text-[#16437E] pb-6 md:pb-3 md:text-center">Services</h1>
+          <p className="text-gray-500 font-medium text-start w-1/2 md:pb-3 md:w-2/6 mx-auto md:text-center">
             We provide a comprehensive approach to help you navigate the VA benefits process with confidence.
           </p>
         </div>
-        <div className="min-h-[90vh] bg-[#E0F7FF] dark:bg-[#E0F7FF] p-8 flex items-center justify-center">
+        <div className="min-h-[80vh] md:min-h-[70vh] bg-[#E0F7FF] dark:bg-[#E0F7FF]  flex items-center justify-center">
           <div className="max-w-7xl w-full flex items-center justify-between">
             <div className="relative">
-              <div className="p-10 bg-gray-100 shadow-md rounded-full">
+              <div className="p-10  bg-gray-100 shadow-md rounded-full">
                 <div className="w-80 h-80 rounded-full shadow-gray-400 bg-gradient-to-br from-[#0B2A52] via-blue-800 to-blue-900 shadow-4xl flex items-center justify-center relative">
                   <img
                     src="https://i.ibb.co/99r83sPw/Untitled-design-6.png"
@@ -35,13 +34,13 @@ export default function Services() {
               </div>
               {/* Connecting Lines */}
               <div className="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2">
-                <div className="absolute w-[350px] h-px bg-gray-400 transform -rotate-45 origin-left"></div>
+                <div className="absolute  w-[350px] h-px bg-gray-400 transform -rotate-45 origin-left"></div>
                 <div className="absolute w-[350px] h-px bg-gray-400"></div>
                 <div className="absolute w-[350px] h-px bg-gray-400 transform rotate-45 origin-left"></div>
               </div>
             </div>
             {/* Services - Right Side */}
-            <div className="flex flex-col space-y-16 ml-20">
+            <div className="flex flex-col space-y-16 md:space-y-14 ml-20">
               {/* Benefits Eligibility Assessment */}
               <div className="flex items-center relative">
                 <div className="w-28 h-28 rounded-full absolute -left-14 bg-gradient-to-br border border-white from-[#0B2A52] to-blue-800 shadow-xl flex items-center justify-center mr-6">
@@ -114,7 +113,7 @@ export default function Services() {
               </div>
             </div>
           </motion.div>
-          <div className="space-y-8 w-full max-w-md">
+          <div className="space-y-8 w-full max-w-md mt-5">
             {/* Benefits Eligibility Assessment */}
             <motion.div
               variants={mobileCardVariants}

@@ -53,7 +53,6 @@ const OTPVerification = () => {
       if (!e.target.value && index > 0) {
         inputRefs.current[index - 1].focus();
       }
-
       setValue(`otp${index + 1}`, "", { shouldValidate: true });
     }
   };
@@ -67,10 +66,9 @@ const OTPVerification = () => {
       const email = localStorage.getItem("email");
 
       try {
-        setOTPVerify(true); // Start loading
+        setOTPVerify(true); 
         const response = await otpVerification({ email, otp }).unwrap();
         console.log("OTP verified:", response);
-
         toast.success("OTP verified successfully!");
         reset()
         setTimeout(() => navigate("/reset_password"), 1000);
@@ -98,6 +96,7 @@ const OTPVerification = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#0B2A52] text-white">
+      
       <div className="max-w-md w-full p-4 md:px-0">
         <h2 className="md:text-3xl text-2xl font-bold mb-2 text-start">Account Verification</h2>
         <p className="text-sm text-gray-300 mb-10 text-start">

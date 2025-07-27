@@ -58,7 +58,6 @@ const Pricing_Plan = () => {
     setIsModalOpen(false)
   }
 
-  // Animation variants for mobile view
   const mobileTextVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -72,10 +71,9 @@ const Pricing_Plan = () => {
   return (
     <section 
     id="pricing_plan"
-    className="md:p-5 bg-[#F1F8FE] dark:bg-[#F1F8FE] md:py-20 pt-10 md:pt-28 pb-10 md:pb-10 md:min-h-[75vh] flex items-center justify-center">
+    className="md:p-5 bg-[#E0F7FF] dark:bg-[#E0F7FF] md:py-20 pt-6 md:pt-28 pb-10 md:pb-10 md:min-h-[75vh] flex items-center justify-center">
       <ToastContainer />
 
-      {/* DaisyUI Modal */}
       <input
         type="checkbox"
         id="plan-modal"
@@ -178,17 +176,19 @@ const Pricing_Plan = () => {
       </div>
 
       {/* Large Device View */}
-      <div className="hidden md:block bg-[#F1F8FE] dark:bg-[#F1F8FE] container p-2 mx-auto md:pb-10">
-        <div className="container w-3/4 mx-auto text-start flex items-start justify-between mb-10 text-4xl font-bold">
-          <div>
-            <h1 className="text-[#16437E]">
+      <div className="hidden md:block bg-[#E0F7FF] dark:bg-[#E0F7FF] container p-2 mx-auto md:pb-10">
+        <div className="container  mx-auto text-start flex items-start justify-between mb-10 text-4xl font-bold">
+          <div className="md:px-6 flex items-center justify-between basis-10/12">
+            <div className="">
+              <h1 className="text-[#16437E]">
               You can complete the Veterans <br /> Benefits form with a
             </h1>
             <h1 className="bg-[#B31942] text-white w-[600px] flex items-center justify-center rounded-full p-4 px-10 text-3xl py-4 shadow-md shadow-gray-700 font-bold mt-7">
               <span className="text-white font-bold text-4xl">Payment of $195 or $50</span>
             </h1>
-          </div>
-          <div
+            </div>
+
+              <div
             onClick={() => setIsModalOpen(true)}
             className="bg-[#0A3161] cursor-pointer shadow-lg shadow-black/80 h-44 w-44 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-105"
           >
@@ -196,6 +196,8 @@ const Pricing_Plan = () => {
               Claim now <FiArrowUpRight className="flex mx-auto" size={36} />
             </span>
           </div>
+          </div>
+        
         </div>
         <div className="w-full mx-auto pb-5">
           <iframe
@@ -214,7 +216,7 @@ const Pricing_Plan = () => {
       <div className="md:hidden bg-[#E0F7FF] dark:bg-[#E0F7FF] container p-2 mx-auto">
         <motion.div variants={mobileTextVariants} initial="hidden" animate="visible" className="text-center mb-8">
           <h1 className="text-2xl font-bold text-[#16437E]">Complete the Veterans Benefits form with a</h1>
-          <h1 className="bg-[#B31942] text-white w-full max-w-[350px] mx-auto flex items-center justify-center rounded-full p-3 text-2xl shadow-md shadow-gray-700 font-bold mt-5">
+          <h1 className="bg-[#B31942] text-white w-full max-w-[350px] mx-auto flex items-center justify-center rounded-full p-2 text-2xl shadow-md shadow-gray-700 font-bold mt-5">
             <span className="text-white font-bold text-2xl">Payment of $195 or $50</span>
           </h1>
         </motion.div>
@@ -233,7 +235,7 @@ const Pricing_Plan = () => {
             </span>
           </div>
         </motion.div>
-        <div className="w-full mx-auto">
+        <div className="w-full mx-auto p-1 md:p-0">
           <iframe
             className="rounded-r-[20px] rounded-bl-[20px] rounded-tl-none w-full h-[250px] rounded relative z-10"
             src="https://www.youtube.com/embed/tkoxvKiBtwc?si=aspqN1u1M7Gm_TfP"

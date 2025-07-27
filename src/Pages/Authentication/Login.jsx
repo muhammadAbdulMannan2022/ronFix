@@ -20,7 +20,7 @@ const Login = () => {
 	const from = location.state?.from?.pathname;
 
 	const [loggedInUser] = useLoggedInUserMutation();
-	const { refetch } = useGetLoggedUserQuery(); // ✅ Refetch hook
+	const { refetch } = useGetLoggedUserQuery(); 
 	const [isLoading, setIsLoading] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -41,7 +41,7 @@ const Login = () => {
 				response.email === "admin@gmail.com" ? "true" : "false"
 			);
 
-			// ✅ Refetch the logged-in user data
+			
 			await refetch();
 
 			toast.success("Logged in successfully!", {
@@ -55,7 +55,9 @@ const Login = () => {
 			}, 1000);
 		} catch (error) {
 			console.log("error", error);
-			toast.error(`Something went wrong!`, {
+			  const errorMessage = error?.data?.non_field_errors || "Something went wrong!";
+
+			toast.error(errorMessage, {
 				id: toastId,
 				duration: 2000,
 			});
@@ -93,7 +95,7 @@ const Login = () => {
 					<input
 						type="email"
 						id="email"
-						className="w-full p-3 border bg-white border-gray-300 rounded-lg mt-2 text-black"
+						className="w-full p-3 border bg-white dark:bg-white border-gray-300 rounded-lg mt-2 text-black"
 						placeholder="Enter Email"
 						{...register("email", {
 							required: "Email is required",
@@ -107,7 +109,7 @@ const Login = () => {
 				</div>
 
 				{/* Password Field */}
-				<div className="mb-6">
+				{/* <div className="mb-6">
 					<label
 						htmlFor="password"
 						className="block text-sm font-semibold"
@@ -118,7 +120,7 @@ const Login = () => {
 						<input
 							type={showPassword ? "text" : "password"}
 							id="password"
-							className="w-full p-3 border bg-white border-gray-300 rounded-lg text-black"
+							className="w-full p-3 border bg-white dark:bg-white border-gray-300 rounded-lg text-black"
 							placeholder="Enter Password"
 							{...register("password", {
 								required: "Password is required",
@@ -127,7 +129,7 @@ const Login = () => {
 						<button
 							type="button"
 							onClick={togglePasswordVisibility}
-							className="absolute right-3 top-1/2 -translate-y-[55%] text-gray-500 hover:text-gray-700"
+							className="absolute right-3  ps-2 top-1/2 -translate-y-[55%] text-gray-500 hover:text-gray-700"
 							aria-label={
 								showPassword ? "Hide password" : "Show password"
 							}
@@ -144,7 +146,37 @@ const Login = () => {
 							{errors.password.message}
 						</p>
 					)}
-				</div>
+				</div> */}
+
+				<div className="mb-6">
+  <label htmlFor="password" className="block text-sm font-semibold">
+    Password
+  </label>
+  <div className="relative w-full mt-2">
+    <input
+      type={showPassword ? "text" : "password"}
+      id="password"
+      className="w-full p-3 border bg-white dark:bg-white border-gray-300 rounded-lg text-black pr-10" // Added padding-right to avoid overlap
+      placeholder="Enter Password"
+      {...register("password", {
+        required: "Password is required",
+      })}
+    />
+    <button
+      type="button"
+      onClick={togglePasswordVisibility}
+      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+      aria-label={showPassword ? "Hide password" : "Show password"}
+    >
+      {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+    </button>
+  </div>
+  {errors.password && (
+    <p className="text-red-500 text-xs mt-1">
+      {errors.password.message}
+    </p>
+  )}
+</div>
 
 				{/* Remember Me + Forgot */}
 				<div className="flex justify-end items-center mb-4">
@@ -164,19 +196,15 @@ const Login = () => {
 					</Link>
 				</div>
 
-				{/* Submit Button */}
-				{isLoading ? (
-					<div className="w-full flex justify-center">
-						<span className="loading loading-bars loading-lg text-[#B31942]"></span>
-					</div>
-				) : (
-					<button
-						type="submit"
-						className="w-full p-3 bg-[#B31942] text-white rounded-lg font-semibold hover:bg-[#af2a4d] transition"
-					>
-						Login
-					</button>
-				)}
+			
+
+				 <button
+            type="submit"
+            className="w-full bg-[#B31942] py-2 uppercase mt-4 rounded-md text-white font-semibold hover:opacity-90"
+            disabled={isLoading}
+          >
+            {isLoading ? <span className="loading loading-bars loading-md"></span> : "Login"}
+          </button>
 
 				{/* Signup Link */}
 				<div className="mt-4 mb-4 text-center">
